@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "BaseCLI": {
+      "commandName": "Project",
+      "commandLineArgs": "Test -s \"Hey There\" -i 687"
+    }
+  }
+}

@@ -1,0 +1,48 @@
+using System.Linq;
+using Microsoft.Extensions.DependencyInjection;
+using NUnit.Framework;
+using SimpleCLI.Conductor;
+using SimpleCLI.Tests.TestCommands;
+
+namespace SimpleCLI.Tests.Conductor
+{
+	public class CommandFactoryTests
+	{
+		private ICommandFactory _commandFactory;
+
+		[SetUp]
+		public void Setup()
+		{
+			_commandFactory = TestCommandWireUp
+				.WireUpTestCommandsAndCreateServiceProvider()
+				.GetRequiredService<ICommandFactory>();
+		}
+
+		[Test]
+		public void GetCommands_RetrievesAllCommands()
+		{
+			var commands = _commandFactory.GetCommands();
+
+			Assert.True(commands.Any(x => x.GetType() == typeof(TestCommand1)));
+			Assert.True(commands.Any(x => x.GetType() == typeof(TestCommand2)));
+		}
+
+		[Test]
+		public void GetCommand_GetsCommandWithSpecifiedName()
+		{
+			const string command2Name = "6ea27e30-2d8e-43ea-a9d9-bb212fe199a0";
+			var command = _commandFactory.GetCommand(command2Name);
+
+			Assert.True(command.GetType() == typeof(TestCommand2));
+		}
+
+		[Test]
+		public void GetCommand_NoCommandExistsForInputtedName_ReturnsNull()
+		{
+			const string command2Name = "Not a command name";
+			var command = _commandFactory.GetCommand(command2Name);
+
+			Assert.Null(command);
+		}
+	}
+}
