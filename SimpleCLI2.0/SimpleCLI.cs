@@ -5,132 +5,101 @@ using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using SimpleCLI.Command;
 using SimpleCLI.Conductor;
-using SimpleCLI.Execution;
-using SimpleCLI.FlagParsing;
-using SimpleCLI.Help;
-using SimpleCLI.Validation;
-using Console = SimpleCLI.Conductor.Console;
 
 namespace SimpleCLI
 {
 	public static class SimpleCLI
 	{
-		public static void Execute(string[] args, Assembly[] commandAssemblies, Action<ServiceCollection> setupServices = null)
+		public static void Execute(string[] args, Assembly[] commandAssemblies, Action<IServiceCollection> setupServices = null)
 		{
 			var sp = Setup(commandAssemblies, setupServices);
 
-			sp
-				.GetRequiredService<CommandConductor>()
-				.Conduce(args);
+			sp.GetRequiredService<CommandConductor>().Conduce(args);
 		}
 
-		private static IServiceProvider Setup(Assembly[] commandAssemblies, Action<ServiceCollection> setupServices = null)
-		{
-			var sc = new ServiceCollection();
-			sc.AddSingleton<ICommandExecutor, CommandExecutor>();
-			sc.AddSingleton<FlagParser>();
-			sc.AddSingleton<ICommandFactory, CommandFactory>();
-			sc.AddSingleton<CommandAndArgsParser>();
-			sc.AddSingleton<Helper>();
-			sc.AddSingleton<IValidator, Validator>();
-			sc.AddSingleton<ICommandFactory, CommandFactory>();
-			sc.AddSingleton<IConsole, Console>();
-			sc.AddSingleton<CommandConductor>();
-			SetupCommands(sc, commandAssemblies);
+        private static IServiceProvider Setup(Assembly[] assemblies, Action<IServiceCollection> setupServices = null)
+        {
+            var sc = new ServiceCollection();
+			sc.AddCliServices();
+			SetupCommands(sc, assemblies);
 
 			setupServices?.Invoke(sc);
 
 			var sp = sc.BuildServiceProvider();
 
-			ValidateCommandSetup(commandAssemblies, sp);
-
-			return sp;
+            return sp;
 		}
 
-		private static void SetupCommands(ServiceCollection sc, Assembly[] commandAssemblies)
-		{
-			var commandTypes = GetCommandTypes(commandAssemblies);
-			foreach (var commandType in commandTypes)
-				sc.AddSingleton(commandType);
+        private static void SetupCommands(ServiceCollection sc, Assembly[] assemblies)
+        {
+            var commandAssemblies = new CommandSetupService(assemblies);
+            commandAssemblies.AddCommands(sc);
+			commandAssemblies.AddCommandCatalogue(sc);
+        }
 
-			var catalogueDictionary = GetCommandTypeParsedArgsDictionary(commandTypes);
-			sc.AddSingleton<ICommandCatalogue>(new CommandCatalogue(catalogueDictionary));
-		}
+        private class CommandSetupService
+        {
+            private readonly Dictionary<Type, Type> _argToCommand;
 
-		private static void ValidateCommandSetup(Assembly[] commandAssemblies, IServiceProvider sp)
-		{
-			var commandTypes = GetCommandTypes(commandAssemblies);
-			var commandTypeArgTypeDictionary = GetCommandTypeParsedArgsDictionary(commandTypes);
-			var errors = new List<string>();
-			foreach (var commandTypeArgTypePair in commandTypeArgTypeDictionary)
-				errors.AddRange(ValidateCommandTypeArgTypeAreSetupCorrectly(commandTypeArgTypePair.Key, commandTypeArgTypePair.Value, sp));
+            public CommandSetupService(Assembly[] assemblies)
+            {
+                //Should validate that arg infos set delegate is not null
+                var commandTypes = assemblies
+                    .SelectMany(x => x.GetTypes())
+                    .Where(type => type.GetInterfaces().Contains(typeof(ICommand<>)) && !type.IsInterface && !type.IsAbstract)
+                    .ToList();
+                _argToCommand = GetArgToCommandDictionary(commandTypes);
+            }
 
-			if (errors.Any())
-				throw new SimpleCLISetupException(string.Join(Environment.NewLine, errors));
-		}
+            public void AddCommands(IServiceCollection sc)
+                => _argToCommand.Select(x => x.Value).ToList().ForEach(c => sc.AddSingleton(sc));
 
-		private static List<string> ValidateCommandTypeArgTypeAreSetupCorrectly(Type commandType, Type parsedArgsType, IServiceProvider sp)
-		{
-			var command = sp.GetRequiredService(commandType) as ICommand;
-			var argInfos = command.ArgInfos;
-			var parsedArgsFlaggedProperties = GetParsedArgsFlaggedProperties(parsedArgsType);
-			var errors = new List<string>();
-			foreach (var argInfo in argInfos)
-			{
-				var matchingParsedArg = parsedArgsFlaggedProperties
-					.SingleOrDefault(x => x.Flag == argInfo.Flag);
-				if (matchingParsedArg == default)
-				{
-					errors.Add($"{command.Name}: No property found in parsed args for {argInfo.FriendlyName} flag");
-					continue;
-				}
+            public void AddCommandCatalogue(IServiceCollection sc)
+                => sc.AddSingleton<ICommandCatalogue>(new CommandCatalogue(_argToCommand));
 
-				if (matchingParsedArg.Type != argInfo.MatchingParsedArgsPropertyType)
-					errors.Add($"{command.Name}: property found in parsed args for {argInfo.FriendlyName} flag is of the wrong type, it should be {argInfo.MatchingParsedArgsPropertyType.Name}");
-			}
+            private Dictionary<Type, Type> GetArgToCommandDictionary(List<Type> commandTypes)
+            {
+                var argsToCommand = new Dictionary<Type, Type>();
+                var errors = new List<string>();
+                foreach (var commandType in commandTypes)
+                {
+                    try
+                    {
+                        var argsType = GetArgsType(commandType);
+                        if (argsToCommand.ContainsKey(argsType))
+                        {
+                            errors.Add($"Multiple commands for args type {argsType.FullName} detected");
+                            continue;
+                        }
 
-			foreach (var parsedArgsFlaggedProperty in parsedArgsFlaggedProperties)
-			{
-				if (argInfos.All(x => x.Flag != parsedArgsFlaggedProperty.Flag))
-					errors.Add($"{command.Name}: No arg info found for property with flag -{parsedArgsFlaggedProperty.Flag}");
-			}
+                        argsToCommand.Add(argsType, commandType);
+                    }
+                    catch (SimpleCLISetupException e)
+                    {
+                        errors.Add(e.Message);
+                    }
+                }
 
-			return errors;
-		}
+                if (errors.Any())
+                    throw new SimpleCLISetupException(string.Join(Environment.NewLine, errors));
 
-		private static List<(string Flag, Type Type)> GetParsedArgsFlaggedProperties(Type parsedArgsType)
-		{
-			var flagProperties = parsedArgsType
-				.GetProperties()
-				.Where(x => x.GetCustomAttributes().Any(x => x.GetType() == typeof(FlagAttribute)));
-			return flagProperties
-				.Select(x => (x.GetCustomAttribute<FlagAttribute>().Flag, x.PropertyType))
-				.ToList();
-		}
 
-		private static Dictionary<Type, Type> GetCommandTypeParsedArgsDictionary(List<Type> commandTypes)
-			=> commandTypes
-				.Select(ct => new KeyValuePair<Type, Type>(ct, GetParsedArgsType(ct)))
-				.ToDictionary(x => x.Key, x => x.Value);
+                return argsToCommand;
+            }
 
-		private static List<Type> GetCommandTypes(Assembly[] commandAssemblies)
-			=> commandAssemblies
-				.SelectMany(x => x.GetTypes())
-				.Where(type => typeof(ICommand).IsAssignableFrom(type) && !type.IsInterface && !type.IsAbstract)
-				.ToList();
+            private Type GetArgsType(Type commandType)
+            {
+                var parsedArgsType = commandType
+                    .GetInterface(typeof(ICommand<>).Name)
+                    ?.GetGenericArguments()
+                    .SingleOrDefault();
 
-		private static Type GetParsedArgsType(Type commandType)
-		{
-			var parsedArgsType = commandType
-				.GetInterface(typeof(ICommand<ParsedArgs>).Name)
-				?.GetGenericArguments()
-				.SingleOrDefault();
+                if (parsedArgsType == null)
+                    throw new SimpleCLISetupException(
+                        $"Unable to get parsed args type for command {commandType.FullName} please check this is setup properly");
 
-			if (parsedArgsType == null)
-				throw new SimpleCLISetupException(
-					$"Unable to get parsed args type for command {commandType.FullName} please check this is setup properly");
-
-			return parsedArgsType;
-		}
-	}
+                return parsedArgsType;
+            }
+        }
+    }
 }

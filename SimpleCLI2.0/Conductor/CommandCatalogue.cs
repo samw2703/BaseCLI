@@ -6,23 +6,23 @@ namespace SimpleCLI.Conductor
 {
 	internal class CommandCatalogue : ICommandCatalogue
 	{
-		private readonly Dictionary<Type, Type> _commandToArgsTypeDictionary;
+		private readonly Dictionary<Type, Type> _argToCommand;
 
-		public CommandCatalogue(Dictionary<Type, Type> commandToArgsTypeDictionary)
+		public CommandCatalogue(Dictionary<Type, Type> argToCommand)
 		{
-			_commandToArgsTypeDictionary = commandToArgsTypeDictionary;
+			_argToCommand = argToCommand;
 		}
 
 		public Type GetParsedArgTypeForCommand(Type commandType)
 		{
-			return _commandToArgsTypeDictionary.ContainsKey(commandType)
-				? _commandToArgsTypeDictionary[commandType]
+			return _argToCommand.ContainsValue(commandType)
+				? _argToCommand.Single(x => x.Value == commandType).Key
 				: throw new ParsedArgsWireupException(commandType);
 		}
 
 		public List<Type> GetCommandTypes()
-			=> _commandToArgsTypeDictionary
-				.Keys
+			=> _argToCommand
+				.Values
 				.ToList();
 	}
 }
