@@ -7,8 +7,7 @@ namespace SimpleCLI.Conductor
 {
 	internal class CommandFactory : ICommandFactory
 	{
-		private List<ICommand> _commands;
-		private readonly IServiceProvider _serviceProvider;
+        private readonly IServiceProvider _serviceProvider;
 		private readonly ICommandCatalogue _commandCatalogue;
 
 		public CommandFactory(IServiceProvider serviceProvider, ICommandCatalogue commandCatalogue)
@@ -17,15 +16,16 @@ namespace SimpleCLI.Conductor
 			_commandCatalogue = commandCatalogue;
 		}
 
-		public ICommand GetCommand(string commandName)
-			=> GetCommands().SingleOrDefault(cmd => cmd.Name == commandName);
+		public CommandReflectionObject GetCommand(string commandName) =>
+            new(GetCommands().SingleOrDefault(cmd => cmd.Name == commandName));
 
-		public List<ICommand> GetCommands()
-		{
-			return _commands ??= _commandCatalogue
-				.GetCommandTypes()
-				.Select(commandType => (ICommand) _serviceProvider.GetService(commandType))
+		public ICommand<TArgs> GetCommand<TArgs>() where TArgs : ParsedArgs
+			=> (ICommand<TArgs>)_serviceProvider.GetService(_commandCatalogue.GetCommandType<TArgs>());
+
+		public List<CommandReflectionObject> GetCommands()
+            => _commandCatalogue.GetCommandTypes()
+				.Select(commandType => new CommandReflectionObject(_serviceProvider.GetService(commandType)))
 				.ToList();
-		}
-	}
+		
+    }
 }

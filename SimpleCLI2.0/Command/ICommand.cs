@@ -2,15 +2,13 @@
 
 namespace SimpleCLI.Command
 {
-	public interface ICommand
-	{
-		string Name { get; }
-		string Description { get; }
-		List<ArgInfo> ArgInfos { get; }
-	}
 
-	public interface ICommand<TParsedArgs> : ICommand where TParsedArgs : ParsedArgs
+	public interface ICommand<TArgs>
 	{
-		void Execute(TParsedArgs args);
+        string Name { get; }
+        string Description { get; }
+        List<ArgInfo> ArgInfos { get; }
+
+		void Execute(TArgs args);
 	}
 }

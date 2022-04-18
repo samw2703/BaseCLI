@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
+using SimpleCLI.Command;
 using SimpleCLI.Help;
 using SimpleCLI.Tests.TestCommands;
 
@@ -34,7 +35,7 @@ namespace SimpleCLI.Tests.Help
 -str Strrring - A string
 -intt intager - An integer";
 
-			Assert.AreEqual(expectedHelpText, _helper.GetCommandHelp(new TestCommand1()));
+			Assert.AreEqual(expectedHelpText, _helper.GetCommandHelp(new CommandReflectionObject(new TestCommand1())));
 		}
 
 		[Test]
@@ -43,7 +44,7 @@ namespace SimpleCLI.Tests.Help
 			const string expectedHelpText = @"6ea27e30-2d8e-43ea-a9d9-bb212fe199a0 - I am an extremely complicated command
 -m An arg (mandatory) - A string";
 
-			Assert.AreEqual(expectedHelpText, _helper.GetCommandHelp(new TestCommand2()));
+			Assert.AreEqual(expectedHelpText, _helper.GetCommandHelp(new CommandReflectionObject(new TestCommand2())));
 		}
 	}
 }

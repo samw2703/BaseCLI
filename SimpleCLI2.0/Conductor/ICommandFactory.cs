@@ -5,7 +5,8 @@ namespace SimpleCLI.Conductor
 {
 	internal interface ICommandFactory
 	{
-		ICommand GetCommand(string commandName);
-		List<ICommand> GetCommands();
+		CommandReflectionObject GetCommand(string commandName);
+		ICommand<TArgs> GetCommand<TArgs>() where TArgs : ParsedArgs;
+		List<CommandReflectionObject> GetCommands();
 	}
 }

@@ -24,5 +24,8 @@ namespace SimpleCLI.Conductor
 			=> _argToCommand
 				.Values
 				.ToList();
-	}
+
+        public Type GetCommandType<TArgs>() => _argToCommand[typeof(TArgs)];
+        
+    }
 }

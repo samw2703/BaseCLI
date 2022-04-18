@@ -34,7 +34,7 @@ namespace SimpleCLI.Tests.Conductor
 			const string expectedMessage = @"f3a76134-967a-4328-9765-8f7d388b9596 - I am the first test command
 6ea27e30-2d8e-43ea-a9d9-bb212fe199a0 - I am an extremely complicated command";
 			Assert.AreEqual(expectedMessage, _console.Messages.Single());
-			_defaultMockCommandExecutor.Verify(x => x.Execute(It.IsAny<ICommand>(), It.IsAny<List<string>>()), Times.Never);
+			_defaultMockCommandExecutor.Verify(x => x.Execute(It.IsAny<CommandReflectionObject>(), It.IsAny<List<string>>()), Times.Never);
 		}
 
 		[Test]
@@ -46,7 +46,7 @@ namespace SimpleCLI.Tests.Conductor
 			const string expectedMessage = @"f3a76134-967a-4328-9765-8f7d388b9596 - I am the first test command
 6ea27e30-2d8e-43ea-a9d9-bb212fe199a0 - I am an extremely complicated command";
 			Assert.AreEqual(expectedMessage, _console.Messages.Single());
-			_defaultMockCommandExecutor.Verify(x => x.Execute(It.IsAny<ICommand>(), It.IsAny<List<string>>()), Times.Never);
+			_defaultMockCommandExecutor.Verify(x => x.Execute(It.IsAny<CommandReflectionObject>(), It.IsAny<List<string>>()), Times.Never);
 		}
 
 		[Test]
@@ -59,7 +59,7 @@ namespace SimpleCLI.Tests.Conductor
 -str Strrring - A string
 -intt intager - An integer";
 			Assert.AreEqual(expectedMessage, _console.Messages.Single());
-			_defaultMockCommandExecutor.Verify(x => x.Execute(It.IsAny<ICommand>(), It.IsAny<List<string>>()), Times.Never);
+			_defaultMockCommandExecutor.Verify(x => x.Execute(It.IsAny<CommandReflectionObject>(), It.IsAny<List<string>>()), Times.Never);
 		}
 
 		[Test]
@@ -79,7 +79,7 @@ f3a76134-967a-4328-9765-8f7d388b9596 - I am the first test command
 -str Strrring - A string
 -intt intager - An integer";
 			Assert.AreEqual(expectedMessage, _console.Messages.Single());
-			_defaultMockCommandExecutor.Verify(x => x.Execute(It.IsAny<ICommand>(), It.IsAny<List<string>>()), Times.Never);
+			_defaultMockCommandExecutor.Verify(x => x.Execute(It.IsAny<CommandReflectionObject>(), It.IsAny<List<string>>()), Times.Never);
 		}
 
 		[Test]
@@ -98,7 +98,7 @@ f3a76134-967a-4328-9765-8f7d388b9596 - I am the first test command
 -str Strrring - A string
 -intt intager - An integer";
 			Assert.AreEqual(expectedMessage, _console.Messages.Single());
-			_defaultMockCommandExecutor.Verify(x => x.Execute(It.IsAny<ICommand>(), It.IsAny<List<string>>()), Times.Never);
+			_defaultMockCommandExecutor.Verify(x => x.Execute(It.IsAny<CommandReflectionObject>(), It.IsAny<List<string>>()), Times.Never);
 		}
 
 		[Test]
@@ -108,7 +108,7 @@ f3a76134-967a-4328-9765-8f7d388b9596 - I am the first test command
 			var mockExecutor = new Mock<ICommandExecutor>();
 			Conduce(args, commandExecutor: mockExecutor.Object);
 
-			mockExecutor.Verify(x => x.Execute(It.IsAny<TestCommand1>(), It.IsAny<List<string>>()), Times.Once);
+			mockExecutor.Verify(x => x.Execute(It.Is<CommandReflectionObject>(x => x.Name == new TestCommand1().Name), It.IsAny<List<string>>()), Times.Once);
 		}
 
 		[Test]
@@ -117,7 +117,7 @@ f3a76134-967a-4328-9765-8f7d388b9596 - I am the first test command
 			var args = new[] { "f3a76134-967a-4328-9765-8f7d388b9596" };
 			var mockExecutor = new Mock<ICommandExecutor>();
 			mockExecutor
-				.Setup(x => x.Execute(It.IsAny<ICommand>(), It.IsAny<List<string>>()))
+				.Setup(x => x.Execute(It.IsAny<CommandReflectionObject>(), It.IsAny<List<string>>()))
 				.Throws(new Exception());
 			Conduce(args, commandExecutor: mockExecutor.Object);
 

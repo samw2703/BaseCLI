@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
+using SimpleCLI.Command;
 using SimpleCLI.Execution;
 using SimpleCLI.Tests.TestCommands;
 
@@ -17,7 +18,7 @@ namespace SimpleCLI.Tests.Execution
 			var commandExecutor = TestCommandWireUp
 				.WireUpTestCommandsAndCreateServiceProvider()
 				.GetRequiredService<ICommandExecutor>();
-			commandExecutor.Execute(new TestCommand1(), new List<string>
+			commandExecutor.Execute(new CommandReflectionObject(new TestCommand1()), new List<string>
 			{
 				"-str",
 				stringArg,

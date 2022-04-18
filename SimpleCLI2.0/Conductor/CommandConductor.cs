@@ -80,7 +80,7 @@ namespace SimpleCLI.Conductor
 			}
 		}
 
-		private void PrintHelp(ICommand command = null)
+		private void PrintHelp(CommandReflectionObject? command = null)
 		{
 			if (command == null)
 			{

@@ -16,18 +16,18 @@ namespace SimpleCLI.Execution
 			_commandCatalogue = commandCatalogue;
 		}
 
-		public void Execute(ICommand command, List<string> args)
+		public void Execute(CommandReflectionObject command, List<string> args)
 		{
 			var parsedArgs = Parse(command, args);
 			ExecuteCommand(command, parsedArgs);
 		}
 
-		private void ExecuteCommand(ICommand command, object parsedArgs)
+		private void ExecuteCommand(CommandReflectionObject command, object parsedArgs)
 			=> command.GetType()
 				.GetMethod(nameof(ICommand<ParsedArgs>.Execute))
 				.Invoke(command, new[] {parsedArgs});
 
-		private object Parse(ICommand command, List<string> args)
+		private object Parse(CommandReflectionObject command, List<string> args)
 			=> _flagParser
 				.GetType()
 				.GetMethod(nameof(FlagParser.Parse))

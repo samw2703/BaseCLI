@@ -6,7 +6,7 @@ using SimpleCLI.Conductor;
 
 namespace SimpleCLI.Help
 {
-	internal class Helper
+    internal class Helper
 	{
 		private readonly ICommandFactory _commandFactory;
 
@@ -15,7 +15,7 @@ namespace SimpleCLI.Help
 			_commandFactory = commandFactory;
 		}
 
-		public string GetCommandHelp(ICommand command)
+		public string GetCommandHelp(CommandReflectionObject command)
 		{
 			var helpStrings = command.ArgInfos
 				.Select(info => info.GetHelp());
