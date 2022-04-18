@@ -33,8 +33,8 @@ namespace SimpleCLI.Tests
 		{
 			var dictionary = new Dictionary<Type, Type>
 			{
-				{typeof(TestCommand1), typeof(TestCommand1ParsedArgs)},
-				{typeof(TestCommand2), typeof(TestCommand2ParsedArgs)}
+				{typeof(TestCommand1ParsedArgs), typeof(TestCommand1)},
+				{typeof(TestCommand2ParsedArgs), typeof(TestCommand2)}
 			};
 			return new CommandCatalogue(dictionary);
 		}

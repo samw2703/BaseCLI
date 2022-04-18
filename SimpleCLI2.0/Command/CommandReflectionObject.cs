@@ -12,7 +12,7 @@ namespace SimpleCLI.Command
 
 		public CommandReflectionObject(object? @object)
         {
-			if (@object == null || !@object.GetType().GetInterfaces().Any(x => x == typeof(ICommand<>)))
+            if (@object == null || @object.GetType().GetInterface(typeof(ICommand<>).Name) == null)
 				throw new ArgumentException("Invalid CommandReflectionObject");
 
 			ArgInfos = (List<ArgInfo>)@object.GetType().GetProperty(nameof(ICommand<object>.ArgInfos)).GetValue(@object);
