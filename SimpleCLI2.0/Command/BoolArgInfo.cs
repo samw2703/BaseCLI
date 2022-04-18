@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace SimpleCLI.Command
 {
-	public class BoolArgInfo : ArgInfo
+	public class BoolArgInfo<TArgs> : ArgInfo<TArgs> where TArgs : new()
 	{
-		public BoolArgInfo(string flag, string friendlyName) 
-			: base(flag, friendlyName, false)
+		public BoolArgInfo(string flag, string friendlyName, Action<TArgs, bool> setArg) 
+			: base(flag, friendlyName, (args, obj) => setArg(args, (bool)obj), false)
 		{
 		}
 
@@ -19,7 +19,7 @@ namespace SimpleCLI.Command
 			ValidationHelper.RemoveKeysFromArgs(args, this);
 		}
 
-		internal override void Parse<TParsedArgs>(TParsedArgs parsedArgs, List<string> args)
+		internal override void Parse(TArgs parsedArgs, List<string> args)
 		{
 			var flagPresent = args.Contains($"-{Flag}");
 			if (flagPresent)

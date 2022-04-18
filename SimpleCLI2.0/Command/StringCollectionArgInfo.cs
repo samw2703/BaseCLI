@@ -4,10 +4,10 @@ using SimpleCLI.Extensions;
 
 namespace SimpleCLI.Command
 {
-	public class StringCollectionArgInfo : ArgInfo
+	public class StringCollectionArgInfo<TArgs> : ArgInfo<TArgs> where TArgs : new()
 	{
-		public StringCollectionArgInfo(string flag, string friendlyName, bool mandatory = false) 
-			: base(flag, friendlyName, mandatory)
+		public StringCollectionArgInfo(string flag, string friendlyName, Action<TArgs, List<string>> setArg, bool mandatory = false) 
+			: base(flag, friendlyName, (args, obj) => setArg(args, (List<string>)obj), mandatory)
 		{
 		}
 
@@ -21,7 +21,7 @@ namespace SimpleCLI.Command
 			ValidationHelper.RemoveKeysAndValuesFromArgs(args, this);
 		}
 
-		internal override void Parse<TParsedArgs>(TParsedArgs parsedArgs, List<string> args)
+		internal override void Parse(TArgs parsedArgs, List<string> args)
 		{
 			var value = args
 				.GetValuesForFlag(Flag);

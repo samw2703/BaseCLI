@@ -6,7 +6,7 @@ namespace SimpleCLI.Command
 	internal static class ParserHelper
 	{
 
-		public static void SetPropertyValue<TParsedArgs>(TParsedArgs parsedArgs, string flag, object value) where TParsedArgs : ParsedArgs
+		public static void SetPropertyValue<TArgs>(TArgs parsedArgs, string flag, object value)
 		{
 			var property = parsedArgs
 				.GetType()

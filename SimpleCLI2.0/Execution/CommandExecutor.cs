@@ -24,7 +24,7 @@ namespace SimpleCLI.Execution
 
 		private void ExecuteCommand(CommandReflectionObject command, object parsedArgs)
 			=> command.GetType()
-				.GetMethod(nameof(ICommand<ParsedArgs>.Execute))
+				.GetMethod(nameof(ICommand<object>.Execute))
 				.Invoke(command, new[] {parsedArgs});
 
 		private object Parse(CommandReflectionObject command, List<string> args)

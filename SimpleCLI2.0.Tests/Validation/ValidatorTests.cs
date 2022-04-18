@@ -12,16 +12,16 @@ namespace SimpleCLI.Tests.Validation
 		{
 			var args = new List<string> {"We're", "going", "Nowhere"};
 			var validator = new Validator();
-			Assert.Throws<ArgValidatorException>(() => validator.Validate(args, new List<global::SimpleCLI.Command.ArgInfo>()));
+			Assert.Throws<ArgValidatorException>(() => validator.Validate(args, new List<ArgInfoReflectionObject>()));
 		}
 
 		[Test]
 		public void Validate_SoThatThereAreNoArgsLeftAtTheEnd_DoesNotThrow()
 		{
 			var args = new List<string> { "-test", "I'll Leave" };
-			var argInfos = new List<global::SimpleCLI.Command.ArgInfo>
+			var argInfos = new List<ArgInfoReflectionObject>
 			{
-				new StringArgInfo("test", "")
+				new(new StringArgInfo<object>("test", "", null))
 			};
 			var validator = new Validator();
 			Assert.DoesNotThrow(() => validator.Validate(args, argInfos));

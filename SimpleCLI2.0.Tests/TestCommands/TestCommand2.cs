@@ -14,9 +14,9 @@ namespace SimpleCLI.Tests.TestCommands
 		public string Name => "6ea27e30-2d8e-43ea-a9d9-bb212fe199a0";
 		public string Description => "I am an extremely complicated command";
 
-		public List<global::SimpleCLI.Command.ArgInfo> ArgInfos => new()
+		public List<Command.ArgInfo<TestCommand2ParsedArgs>> ArgInfos => new()
 		{
-			new StringArgInfo("m", "An arg", true)
+			new StringArgInfo<TestCommand2ParsedArgs>("m", "An arg", null, true)
 		};
 	}
 

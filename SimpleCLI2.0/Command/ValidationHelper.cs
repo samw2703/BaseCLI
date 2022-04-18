@@ -7,19 +7,19 @@ namespace SimpleCLI.Command
 {
 	internal static class ValidationHelper
 	{
-		public static void ValidateMandatoryArgIsPresent(List<string> args, ArgInfo argInfo)
+		public static void ValidateMandatoryArgIsPresent<TArgs>(List<string> args, ArgInfo<TArgs> argInfo) where TArgs : new()
 		{
 			if (args.All(x => x != $"-{argInfo.Flag}") && argInfo.Mandatory)
 				throw new ArgValidatorException($"No value supplied for mandatory argument {argInfo.FriendlyName} (-${argInfo.Flag})");
 		}
 
-		public static void ValidateSingleArgument(List<string> args, ArgInfo argInfo)
+		public static void ValidateSingleArgument<TArgs>(List<string> args, ArgInfo<TArgs> argInfo) where TArgs : new()
 		{
 			if (args.Count(x => x == $"-{argInfo.Flag}") > 1)
 				throw new ArgValidatorException($"Multiple {argInfo.FriendlyName} (-${argInfo.Flag}) args found. You must only provide one of these");
 		} 
 
-		public static void ValidateEnoughArgsForThereToBeValue(List<string> args, ArgInfo argInfo)
+		public static void ValidateEnoughArgsForThereToBeValue<TArgs>(List<string> args, ArgInfo<TArgs> argInfo) where TArgs : new()
 		{
 			var valueIndexes = args
 				.FindAllIndexes($"-{argInfo.Flag}")
@@ -31,7 +31,7 @@ namespace SimpleCLI.Command
 			}
 		}
 
-		public static void RemoveKeysAndValuesFromArgs(List<string> args, ArgInfo argInfo)
+		public static void RemoveKeysAndValuesFromArgs<TArgs>(List<string> args, ArgInfo<TArgs> argInfo) where TArgs : new()
 		{
 			var indexes = args
 				.FindAllIndexes($"-{argInfo.Flag}")
@@ -40,7 +40,7 @@ namespace SimpleCLI.Command
 			RemoveFromArgsAt(indexes, args);
 		}
 
-		public static void RemoveKeysFromArgs(List<string> args, ArgInfo argInfo)
+		public static void RemoveKeysFromArgs<TArgs>(List<string> args, ArgInfo<TArgs> argInfo) where TArgs : new()
 		{
 			var indexes = args
 				.FindAllIndexes($"-{argInfo.Flag}");
@@ -48,7 +48,7 @@ namespace SimpleCLI.Command
 			RemoveFromArgsAt(indexes, args);
 		}
 
-		public static void ValidateValuesAreIntegers(List<string> args, ArgInfo argInfo)
+		public static void ValidateValuesAreIntegers<TArgs>(List<string> args, ArgInfo<TArgs> argInfo) where TArgs : new()
 		{
 			var items = args.FindAllValues($"-{argInfo.Flag}");
 			foreach (var item in items)

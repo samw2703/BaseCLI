@@ -8,10 +8,10 @@ namespace SimpleCLI.Tests.TestCommands
 		public string Name => "f3a76134-967a-4328-9765-8f7d388b9596";
 		public string Description => "I am the first test command";
 
-		public List<global::SimpleCLI.Command.ArgInfo> ArgInfos => new()
+		public List<ArgInfo<TestCommand1ParsedArgs>> ArgInfos => new()
 		{
-			new StringArgInfo("str", "Strrring"),
-			new IntArgInfo("intt", "intager")
+			new StringArgInfo<TestCommand1ParsedArgs>("str", "Strrring", null),
+			new IntArgInfo<TestCommand1ParsedArgs>("intt", "intager", null)
 		};
 		public void Execute(TestCommand1ParsedArgs args)
 		{

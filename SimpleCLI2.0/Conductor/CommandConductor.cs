@@ -94,7 +94,7 @@ namespace SimpleCLI.Conductor
 		private bool ArgsContainsHelpFlag(List<string> args)
 			=> args.Any(x => x == "-h");
 
-		private void Validate(List<string> args, List<ArgInfo> argInfos)
+		private void Validate(List<string> args, List<ArgInfoReflectionObject> argInfos)
 			=> _validator.Validate(args, argInfos);
 	}
 }

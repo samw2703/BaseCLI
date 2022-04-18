@@ -69,7 +69,7 @@ namespace SimpleCLI.Tests.Conductor
 			var args = new[] { "f3a76134-967a-4328-9765-8f7d388b9596" };
 			var mockValidator = new Mock<IValidator>();
 			mockValidator
-				.Setup(x => x.Validate(It.IsAny<List<string>>(), It.IsAny<List<global::SimpleCLI.Command.ArgInfo>>()))
+				.Setup(x => x.Validate(It.IsAny<List<string>>(), It.IsAny<List<ArgInfoReflectionObject>>()))
 				.Throws(new ArgValidatorException(errorMessage));
 			Conduce(args, mockValidator.Object);
 
@@ -88,7 +88,7 @@ f3a76134-967a-4328-9765-8f7d388b9596 - I am the first test command
 			var args = new[] { "f3a76134-967a-4328-9765-8f7d388b9596" };
 			var mockValidator = new Mock<IValidator>();
 			mockValidator
-				.Setup(x => x.Validate(It.IsAny<List<string>>(), It.IsAny<List<global::SimpleCLI.Command.ArgInfo>>()))
+				.Setup(x => x.Validate(It.IsAny<List<string>>(), It.IsAny<List<ArgInfoReflectionObject>>()))
 				.Throws(new Exception());
 			Conduce(args, mockValidator.Object);
 

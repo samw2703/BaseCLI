@@ -129,13 +129,13 @@ namespace SimpleCLI.Tests.ArgInfo
 
 		private void Validate(List<string> args, bool mandatory = false)
 		{
-			new IntCollectionArgInfo(Flag, FriendlyName, mandatory)
+			new IntCollectionArgInfo<TestParsedArgs>(Flag, FriendlyName, null, mandatory)
 				.Validate(args);
 		}
 
 		private void Parse(List<string> args, TestParsedArgs parsedArgs)
 		{
-			new IntCollectionArgInfo(Flag, FriendlyName)
+			new IntCollectionArgInfo<TestParsedArgs>(Flag, FriendlyName, null)
 				.Parse(parsedArgs, args);
 		}
 

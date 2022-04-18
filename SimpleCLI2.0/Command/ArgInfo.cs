@@ -3,19 +3,21 @@ using System.Collections.Generic;
 
 namespace SimpleCLI.Command
 {
-	public abstract class ArgInfo
+	public abstract class ArgInfo<TArgs> where TArgs : new()
 	{
 		internal string Flag { get; }
 		internal string FriendlyName { get; }
 		internal bool Mandatory { get; }
+		internal Action<TArgs, object> SetArg { get; }
 		protected abstract string TypeDescription { get; }
 		internal abstract Type MatchingParsedArgsPropertyType { get; }
 
-		public ArgInfo(string flag, string friendlyName, bool mandatory = false)
+		public ArgInfo(string flag, string friendlyName, Action<TArgs, object> setArg, bool mandatory = false)
 		{
 			Flag = flag;
 			FriendlyName = friendlyName;
-			Mandatory = mandatory;
+            SetArg = setArg;
+            Mandatory = mandatory;
 		}
 
 		internal string GetHelp()
@@ -23,7 +25,7 @@ namespace SimpleCLI.Command
 
 		internal abstract void Validate(List<string> args);
 
-		internal abstract void Parse<TParsedArgs>(TParsedArgs parsedArgs, List<string> args) where TParsedArgs : ParsedArgs;
+		internal abstract void Parse(TArgs parsedArgs, List<string> args);
 
 		private string GetMandatoryText(bool mandatory)
 			=> mandatory ? " (mandatory)" : "";

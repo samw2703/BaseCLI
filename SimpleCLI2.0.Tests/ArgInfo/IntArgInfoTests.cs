@@ -76,7 +76,7 @@ namespace SimpleCLI.Tests.ArgInfo
 		{
 			const int flagValue = 259;
 			var parsedArgs = new TestParsedArgs();
-			var argInfo = new IntArgInfo(ArgFlag, FriendlyName);
+			var argInfo = new IntArgInfo<TestParsedArgs>(ArgFlag, FriendlyName, null);
 			argInfo.Parse(parsedArgs, new List<string>
 			{
 				_dashedFlag,
@@ -97,7 +97,7 @@ namespace SimpleCLI.Tests.ArgInfo
 
 		private void Validate(List<string> args, bool mandatory = false)
 		{
-			new IntArgInfo(ArgFlag, FriendlyName, mandatory)
+			new IntArgInfo<TestParsedArgs>(ArgFlag, FriendlyName, null, mandatory)
 				.Validate(args);
 		}
 	}

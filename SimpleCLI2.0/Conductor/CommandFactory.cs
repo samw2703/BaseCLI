@@ -19,7 +19,7 @@ namespace SimpleCLI.Conductor
 		public CommandReflectionObject GetCommand(string commandName) =>
             new(GetCommands().SingleOrDefault(cmd => cmd.Name == commandName));
 
-		public ICommand<TArgs> GetCommand<TArgs>() where TArgs : ParsedArgs
+		public ICommand<TArgs> GetCommand<TArgs>() where TArgs : new()
 			=> (ICommand<TArgs>)_serviceProvider.GetService(_commandCatalogue.GetCommandType<TArgs>());
 
 		public List<CommandReflectionObject> GetCommands()
