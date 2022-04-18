@@ -86,7 +86,7 @@ namespace SimpleCLI.Tests.ArgInfo
 			Assert.AreEqual(flagValue, parsedArgs.Test);
 		}
 
-		private class TestParsedArgs : ParsedArgs
+		private class TestParsedArgs
 		{
 			[Flag("test")]
 			public int Test { get; set; }

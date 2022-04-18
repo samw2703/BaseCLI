@@ -125,7 +125,7 @@ namespace SimpleCLI.Tests.ArgInfo
 				.Parse(parsedArgs, args);
 		}
 
-		private class TestParsedArgs : ParsedArgs
+		private class TestParsedArgs
 		{
 			[Flag("test")]
 			public List<string> Test { get; set; }

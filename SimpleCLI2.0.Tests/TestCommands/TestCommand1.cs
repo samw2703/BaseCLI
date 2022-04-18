@@ -21,7 +21,7 @@ int arg: {args.IntArg}";
 		}
 	}
 
-	public class TestCommand1ParsedArgs : ParsedArgs
+	public class TestCommand1ParsedArgs
 	{
 		[Flag("str")]
 		public string StringArg { get; set; }

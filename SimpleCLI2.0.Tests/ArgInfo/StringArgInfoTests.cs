@@ -90,7 +90,7 @@ namespace SimpleCLI.Tests.ArgInfo
 			new StringArgInfo<TestParsedArgs>(ArgFlag, FriendlyName, null, mandatory).Validate(args);
 		}
 
-		private class TestParsedArgs : ParsedArgs
+		private class TestParsedArgs
 		{
 			[Flag("test")]
 			public string Test { get; set; }

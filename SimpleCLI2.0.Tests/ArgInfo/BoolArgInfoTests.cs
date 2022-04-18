@@ -84,7 +84,7 @@ namespace SimpleCLI.Tests.ArgInfo
 				.Validate(args);
 		}
 
-		private class TestParsedArgs : ParsedArgs
+		private class TestParsedArgs
 		{
 			[Flag("bool")]
 			public bool Test { get; set; }

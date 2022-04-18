@@ -20,7 +20,7 @@ namespace SimpleCLI.Tests.TestCommands
 		};
 	}
 
-	public class TestCommand2ParsedArgs : ParsedArgs
+	public class TestCommand2ParsedArgs
 	{
 	}
 }
