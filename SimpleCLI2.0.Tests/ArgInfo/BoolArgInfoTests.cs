@@ -9,6 +9,7 @@ namespace SimpleCLI.Tests.ArgInfo
 	{
 		private const string Flag = "bool";
 		private const string FriendlyName = "bool";
+		private const string PropertyName = "Test";
 		private string _dashedFlag = $"-{Flag}";
 
 		[Test]
@@ -74,13 +75,13 @@ namespace SimpleCLI.Tests.ArgInfo
 
 		private void Parse(List<string> args, TestParsedArgs parsedArgs)
 		{
-			new BoolArgInfo<TestParsedArgs>(Flag, FriendlyName, "")
+			new BoolArgInfo<TestParsedArgs>(Flag, FriendlyName, PropertyName)
 				.Parse(parsedArgs, args);
 		}
 
 		private void Validate(List<string> args)
 		{
-			new BoolArgInfo<TestParsedArgs>(Flag, FriendlyName, "")
+			new BoolArgInfo<TestParsedArgs>(Flag, FriendlyName, PropertyName)
 				.Validate(args);
 		}
 

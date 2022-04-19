@@ -10,6 +10,7 @@ namespace SimpleCLI.Tests.ArgInfo
 	{
 		private const string Flag = "test";
 		private const string FriendlyName = "Lots of integers";
+		private const string PropertyName = "Test";
 		private string _dashedFlag = $"-{Flag}";
 
 		[Test]
@@ -129,13 +130,13 @@ namespace SimpleCLI.Tests.ArgInfo
 
 		private void Validate(List<string> args, bool mandatory = false)
 		{
-			new IntCollectionArgInfo<TestParsedArgs>(Flag, FriendlyName, "", mandatory)
+			new IntCollectionArgInfo<TestParsedArgs>(Flag, FriendlyName, PropertyName, mandatory)
 				.Validate(args);
 		}
 
 		private void Parse(List<string> args, TestParsedArgs parsedArgs)
 		{
-			new IntCollectionArgInfo<TestParsedArgs>(Flag, FriendlyName, "")
+			new IntCollectionArgInfo<TestParsedArgs>(Flag, FriendlyName, PropertyName)
 				.Parse(parsedArgs, args);
 		}
 
