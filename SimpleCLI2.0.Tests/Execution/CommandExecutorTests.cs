@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
-using SimpleCLI.Command;
 using SimpleCLI.Execution;
+using SimpleCLI.ReflectionObjects;
 using SimpleCLI.Tests.TestCommands;
 
 namespace SimpleCLI.Tests.Execution

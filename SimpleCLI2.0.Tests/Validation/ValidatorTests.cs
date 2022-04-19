@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using NUnit.Framework;
-using SimpleCLI.Command;
+using SimpleCLI.ReflectionObjects;
 using SimpleCLI.Validation;
 
 namespace SimpleCLI.Tests.Validation

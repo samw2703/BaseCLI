@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
-using SimpleCLI.Command;
 using SimpleCLI.Validation;
 
 namespace SimpleCLI.Tests.ArgInfo

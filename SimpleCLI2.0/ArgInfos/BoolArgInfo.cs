@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace SimpleCLI.Command
+namespace SimpleCLI
 {
 	public class BoolArgInfo<TArgs> : ArgInfo<TArgs> where TArgs : new()
 	{
@@ -14,15 +13,15 @@ namespace SimpleCLI.Command
 
         internal override void Validate(List<string> args)
 		{
-			ValidationHelper.ValidateSingleArgument(args, this);
-			ValidationHelper.RemoveKeysFromArgs(args, this);
+			ArgInfoValidationHelper.ValidateSingleArgument(args, this);
+			ArgInfoValidationHelper.RemoveKeysFromArgs(args, this);
 		}
 
 		internal override void Parse(TArgs parsedArgs, List<string> args)
 		{
 			var flagPresent = args.Contains($"-{Flag}");
 			if (flagPresent)
-				ParserHelper.SetPropertyValue(parsedArgs, PropertyName, true);
+				ArgInfoParserHelper.SetPropertyValue(parsedArgs, PropertyName, true);
 		}
 	}
 }

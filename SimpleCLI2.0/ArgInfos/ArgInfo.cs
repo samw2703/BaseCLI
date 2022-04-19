@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace SimpleCLI.Command
+namespace SimpleCLI
 {
 	public abstract class ArgInfo<TArgs> where TArgs : new()
 	{

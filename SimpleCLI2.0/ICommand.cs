@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SimpleCLI.Command
+namespace SimpleCLI
 {
 
 	public interface ICommand<TArgs> where TArgs : new()

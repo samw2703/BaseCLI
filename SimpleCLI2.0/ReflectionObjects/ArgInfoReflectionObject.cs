@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace SimpleCLI.Command
+namespace SimpleCLI.ReflectionObjects
 {
     internal class ArgInfoReflectionObject
     {

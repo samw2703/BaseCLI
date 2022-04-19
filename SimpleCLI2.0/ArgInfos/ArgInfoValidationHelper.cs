@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using SimpleCLI.Extensions;
 using SimpleCLI.Validation;
 
-namespace SimpleCLI.Command
+namespace SimpleCLI
 {
-	internal static class ValidationHelper
+	internal static class ArgInfoValidationHelper
 	{
 		public static void ValidateMandatoryArgIsPresent<TArgs>(List<string> args, ArgInfo<TArgs> argInfo) where TArgs : new()
 		{

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using SimpleCLI.Command;
 
 namespace SimpleCLI.Tests.TestCommands
 {

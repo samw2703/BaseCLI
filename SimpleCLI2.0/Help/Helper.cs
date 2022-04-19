@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Linq;
-using System.Reflection;
-using SimpleCLI.Command;
 using SimpleCLI.Conductor;
+using SimpleCLI.ReflectionObjects;
 
 namespace SimpleCLI.Help
 {

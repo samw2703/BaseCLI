@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq.Expressions;
-using SimpleCLI.Command;
 
 namespace SimpleCLI.ArgInfoBuilder
 {

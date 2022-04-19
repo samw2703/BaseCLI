@@ -4,10 +4,10 @@ using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using NUnit.Framework;
-using SimpleCLI.Command;
 using SimpleCLI.Conductor;
 using SimpleCLI.Execution;
 using SimpleCLI.Help;
+using SimpleCLI.ReflectionObjects;
 using SimpleCLI.Tests.TestCommands;
 using SimpleCLI.Validation;
 

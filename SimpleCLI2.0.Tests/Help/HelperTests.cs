@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
-using SimpleCLI.Command;
 using SimpleCLI.Help;
+using SimpleCLI.ReflectionObjects;
 using SimpleCLI.Tests.TestCommands;
 
 namespace SimpleCLI.Tests.Help

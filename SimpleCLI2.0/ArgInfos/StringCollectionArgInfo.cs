@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using SimpleCLI.Extensions;
+﻿using System.Collections.Generic;
 
-namespace SimpleCLI.Command
+namespace SimpleCLI
 {
 	public class StringCollectionArgInfo<TArgs> : ArgInfo<TArgs> where TArgs : new()
 	{
@@ -15,9 +13,9 @@ namespace SimpleCLI.Command
 
         internal override void Validate(List<string> args)
 		{
-			ValidationHelper.ValidateMandatoryArgIsPresent(args, this);
-			ValidationHelper.ValidateEnoughArgsForThereToBeValue(args, this);
-			ValidationHelper.RemoveKeysAndValuesFromArgs(args, this);
+			ArgInfoValidationHelper.ValidateMandatoryArgIsPresent(args, this);
+			ArgInfoValidationHelper.ValidateEnoughArgsForThereToBeValue(args, this);
+			ArgInfoValidationHelper.RemoveKeysAndValuesFromArgs(args, this);
 		}
 
 		internal override void Parse(TArgs parsedArgs, List<string> args)
@@ -27,7 +25,7 @@ namespace SimpleCLI.Command
 			if (value == null)
 				return;
 
-			ParserHelper.SetPropertyValue(parsedArgs, PropertyName, value);
+			ArgInfoParserHelper.SetPropertyValue(parsedArgs, PropertyName, value);
 		}
 	}
 }

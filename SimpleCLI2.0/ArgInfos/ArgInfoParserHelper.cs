@@ -1,12 +1,11 @@
 ﻿using System.Linq;
 using System.Reflection;
 
-namespace SimpleCLI.Command
+namespace SimpleCLI
 {
-	internal static class ParserHelper
+	internal static class ArgInfoParserHelper
 	{
-
-		public static void SetPropertyValue<TArgs>(TArgs parsedArgs, string name, object value)
+        public static void SetPropertyValue<TArgs>(TArgs parsedArgs, string name, object value)
         {
             GetProperty(parsedArgs, name).SetValue(parsedArgs, value);
         }
