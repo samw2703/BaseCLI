@@ -13,9 +13,8 @@ namespace SimpleCLI.Command
 		}
 
 		protected override string TypeDescription => "An integer";
-		internal override Type MatchingParsedArgsPropertyType => typeof(int);
 
-		internal override void Validate(List<string> args)
+        internal override void Validate(List<string> args)
 		{
 			ValidationHelper.ValidateMandatoryArgIsPresent(args, this);
 			ValidationHelper.ValidateSingleArgument(args, this);

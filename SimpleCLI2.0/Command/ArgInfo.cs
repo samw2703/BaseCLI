@@ -9,9 +9,8 @@ namespace SimpleCLI.Command
 		internal string FriendlyName { get; }
 		internal bool Mandatory { get; }
         protected abstract string TypeDescription { get; }
-		internal abstract Type MatchingParsedArgsPropertyType { get; }
 
-		public ArgInfo(string flag, string friendlyName, bool mandatory = false)
+        public ArgInfo(string flag, string friendlyName, bool mandatory = false)
 		{
 			Flag = flag;
 			FriendlyName = friendlyName;

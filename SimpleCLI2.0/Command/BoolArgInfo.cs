@@ -11,9 +11,8 @@ namespace SimpleCLI.Command
 		}
 
 		protected override string TypeDescription => "A boolean";
-		internal override Type MatchingParsedArgsPropertyType => typeof(bool);
 
-		internal override void Validate(List<string> args)
+        internal override void Validate(List<string> args)
 		{
 			ValidationHelper.ValidateSingleArgument(args, this);
 			ValidationHelper.RemoveKeysFromArgs(args, this);
