@@ -16,7 +16,7 @@ namespace SimpleCLI.Tests.TestCommands
 
 		public List<Command.ArgInfo<TestCommand2ParsedArgs>> ArgInfos => new()
 		{
-			new StringArgInfo<TestCommand2ParsedArgs>("m", "An arg", true)
+			new StringArgInfo<TestCommand2ParsedArgs>("m", "An arg", "", true)
 		};
 	}
 

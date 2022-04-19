@@ -16,7 +16,7 @@ namespace SimpleCLI.Tests.ArgInfo
 		{
 			const string flagValue = "PleaseWork";
 			var parsedArgs = new TestParsedArgs();
-			var argInfo = new StringArgInfo<TestParsedArgs>(ArgFlag, "");
+			var argInfo = new StringArgInfo<TestParsedArgs>(ArgFlag, "", "Test");
 			argInfo.Parse(parsedArgs, new List<string>
 			{
 				_dashedFlag,
@@ -87,7 +87,7 @@ namespace SimpleCLI.Tests.ArgInfo
 
 		private void Validate(List<string> args, bool mandatory = false)
 		{
-			new StringArgInfo<TestParsedArgs>(ArgFlag, FriendlyName, mandatory).Validate(args);
+			new StringArgInfo<TestParsedArgs>(ArgFlag, FriendlyName, "", mandatory).Validate(args);
 		}
 
 		private class TestParsedArgs

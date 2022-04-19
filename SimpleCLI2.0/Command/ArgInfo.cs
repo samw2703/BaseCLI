@@ -7,13 +7,15 @@ namespace SimpleCLI.Command
 	{
 		internal string Flag { get; }
 		internal string FriendlyName { get; }
-		internal bool Mandatory { get; }
+		internal string PropertyName { get; }
+        internal bool Mandatory { get; }
         protected abstract string TypeDescription { get; }
 
-        public ArgInfo(string flag, string friendlyName, bool mandatory = false)
+        public ArgInfo(string flag, string friendlyName, string propertyName, bool mandatory = false)
 		{
 			Flag = flag;
 			FriendlyName = friendlyName;
+			PropertyName = propertyName;
             Mandatory = mandatory;
 		}
 

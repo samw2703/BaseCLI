@@ -74,13 +74,13 @@ namespace SimpleCLI.Tests.ArgInfo
 
 		private void Parse(List<string> args, TestParsedArgs parsedArgs)
 		{
-			new BoolArgInfo<TestParsedArgs>(Flag, FriendlyName)
+			new BoolArgInfo<TestParsedArgs>(Flag, FriendlyName, "")
 				.Parse(parsedArgs, args);
 		}
 
 		private void Validate(List<string> args)
 		{
-			new BoolArgInfo<TestParsedArgs>(Flag, FriendlyName)
+			new BoolArgInfo<TestParsedArgs>(Flag, FriendlyName, "")
 				.Validate(args);
 		}
 

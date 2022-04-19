@@ -7,8 +7,8 @@ namespace SimpleCLI.Command
 {
 	public class IntCollectionArgInfo<TArgs> : ArgInfo<TArgs> where TArgs : new()
 	{
-		public IntCollectionArgInfo(string flag, string friendlyName, bool mandatory = false) 
-            : base(flag, friendlyName, mandatory)
+		public IntCollectionArgInfo(string flag, string friendlyName, string propertyName, bool mandatory = false) 
+            : base(flag, friendlyName, propertyName, mandatory)
 		{
 		}
 

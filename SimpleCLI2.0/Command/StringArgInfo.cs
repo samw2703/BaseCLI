@@ -7,8 +7,8 @@ namespace SimpleCLI.Command
 {
 	public class StringArgInfo<TArgs> : ArgInfo<TArgs> where TArgs : new()
 	{
-		public StringArgInfo(string flag, string friendlyName, bool mandatory = false) 
-			: base(flag, friendlyName, mandatory)
+		public StringArgInfo(string flag, string friendlyName, string propertyName, bool mandatory = false) 
+			: base(flag, friendlyName, propertyName, mandatory)
 		{
 		}
 
