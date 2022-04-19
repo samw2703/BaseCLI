@@ -11,7 +11,7 @@ namespace SimpleCLI.Command
         internal bool Mandatory { get; }
         protected abstract string TypeDescription { get; }
 
-        public ArgInfo(string flag, string friendlyName, string propertyName, bool mandatory = false)
+        protected ArgInfo(string flag, string friendlyName, string propertyName, bool mandatory = false)
 		{
 			Flag = flag;
 			FriendlyName = friendlyName;

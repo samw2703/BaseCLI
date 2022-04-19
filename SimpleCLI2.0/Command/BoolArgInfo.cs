@@ -5,7 +5,7 @@ namespace SimpleCLI.Command
 {
 	public class BoolArgInfo<TArgs> : ArgInfo<TArgs> where TArgs : new()
 	{
-		public BoolArgInfo(string flag, string friendlyName, string propertyName) 
+		internal BoolArgInfo(string flag, string friendlyName, string propertyName) 
 			: base(flag, friendlyName, propertyName, false)
 		{
 		}
