@@ -6,8 +6,7 @@ namespace SimpleCLI.Validation
 {
 	internal class Validator : IValidator
 	{
-
-		public void Validate(List<string> args, List<ArgInfoReflectionObject> argInfos)
+        public void Validate(List<string> args, List<ArgInfoReflectionObject> argInfos)
 		{
 			var argsCopy = new List<string>(args);
 			foreach (var argInfo in argInfos)

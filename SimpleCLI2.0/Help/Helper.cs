@@ -24,7 +24,7 @@ namespace SimpleCLI.Help
 {string.Join(Environment.NewLine, helpStrings)}";
 		}
 
-		public string GetToolHelp(Assembly commandsAssembly)
+		public string GetToolHelp()
 		{
 			var commands = _commandFactory.GetCommands();
 

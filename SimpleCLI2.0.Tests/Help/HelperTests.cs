@@ -25,7 +25,7 @@ namespace SimpleCLI.Tests.Help
 			const string expectedHelpText = @"f3a76134-967a-4328-9765-8f7d388b9596 - I am the first test command
 6ea27e30-2d8e-43ea-a9d9-bb212fe199a0 - I am an extremely complicated command";
 
-			Assert.AreEqual(expectedHelpText, _helper.GetToolHelp(Assembly.GetAssembly(GetType())));
+			Assert.AreEqual(expectedHelpText, _helper.GetToolHelp());
 		}
 
 		[Test]

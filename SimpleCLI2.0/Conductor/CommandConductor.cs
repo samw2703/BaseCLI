@@ -84,7 +84,7 @@ namespace SimpleCLI.Conductor
 		{
 			if (command == null)
 			{
-				_console.WriteLine(_helper.GetToolHelp(Assembly.GetAssembly(GetType())));
+				_console.WriteLine(_helper.GetToolHelp());
 				return;
 			}
 
