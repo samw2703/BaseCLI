@@ -19,13 +19,13 @@ namespace SimpleCLI.Command
         }
 
         public void Validate(List<string> args)
-        {
-            Execute(nameof(ArgInfo<object>.Validate), args);
-        }
-
-
+            => Execute(nameof(ArgInfo<object>.Validate), args);
+        
         public string GetHelp()
             => (string)Execute(nameof(ArgInfo<object>.GetHelp));
+
+        public void Parse<TArgs>(TArgs parsedArgs, List<string> args)
+            => Execute(nameof(ArgInfo<object>.Parse), parsedArgs, args);
 
         private object Execute(string name, params object[] arguments)
             => _object.GetType().GetRuntimeMethods().Single(x => x.Name == name).Invoke(_object, arguments);

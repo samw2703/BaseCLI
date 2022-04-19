@@ -5,7 +5,7 @@ namespace SimpleCLI.FlagParsing
 {
 	internal class FlagParser
 	{
-		public TArgs Parse<TArgs>(List<string> args, List<ArgInfo<TArgs>> argInfos) where TArgs : new()
+		public TArgs Parse<TArgs>(List<string> args, List<ArgInfoReflectionObject> argInfos) where TArgs : new()
 		{
 			var parsedArgs = new TArgs();
 			foreach (var argInfo in argInfos)

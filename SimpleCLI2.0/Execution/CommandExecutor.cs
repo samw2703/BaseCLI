@@ -24,14 +24,15 @@ namespace SimpleCLI.Execution
 
 		private void ExecuteCommand(CommandReflectionObject command, object parsedArgs)
 			=> command.GetType()
-				.GetMethod(nameof(ICommand<object>.Execute))
+				.GetMethod(nameof(CommandReflectionObject.Execute))
+                .MakeGenericMethod(_commandCatalogue.GetParsedArgTypeForCommand(command.CommandType))
 				.Invoke(command, new[] {parsedArgs});
 
 		private object Parse(CommandReflectionObject command, List<string> args)
 			=> _flagParser
 				.GetType()
 				.GetMethod(nameof(FlagParser.Parse))
-				.MakeGenericMethod(_commandCatalogue.GetParsedArgTypeForCommand(command.GetType()))
+				.MakeGenericMethod(_commandCatalogue.GetParsedArgTypeForCommand(command.CommandType))
 				.Invoke(_flagParser, new object[] {args, command.ArgInfos});
 	}
 }

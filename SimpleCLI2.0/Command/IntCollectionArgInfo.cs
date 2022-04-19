@@ -29,7 +29,7 @@ namespace SimpleCLI.Command
 				.Select(x => Convert.ToInt32((string?) x))
 				.ToList();
 
-			ParserHelper.SetPropertyValue(parsedArgs, Flag, value);
+			ParserHelper.SetPropertyValue(parsedArgs, PropertyName, value);
 		}
 	}
 }

@@ -6,21 +6,12 @@ namespace SimpleCLI.Command
 	internal static class ParserHelper
 	{
 
-		public static void SetPropertyValue<TArgs>(TArgs parsedArgs, string flag, object value)
-		{
-			var property = parsedArgs
-				.GetType()
-				.GetProperties()
-				.Single(x => IsPropertyForFlag(x, flag));
+		public static void SetPropertyValue<TArgs>(TArgs parsedArgs, string name, object value)
+        {
+            GetProperty(parsedArgs, name).SetValue(parsedArgs, value);
+        }
 
-			property.SetValue(parsedArgs, value);
-		}
-
-		private static bool IsPropertyForFlag(PropertyInfo propertyInfo, string flag)
-		{
-			return (propertyInfo
-				.GetCustomAttribute<FlagAttribute>()
-				?.Flag ?? null) == flag;
-		}
-	}
+        private static PropertyInfo GetProperty<TArgs>(TArgs args, string name)
+            => args.GetType().GetRuntimeProperties().SingleOrDefault(x => x.Name == name);
+    }
 }

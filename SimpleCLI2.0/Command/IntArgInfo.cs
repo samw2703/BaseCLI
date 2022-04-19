@@ -31,7 +31,7 @@ namespace SimpleCLI.Command
 			if (value == null)
 				return;
 
-			ParserHelper.SetPropertyValue(parsedArgs, Flag, Convert.ToInt32(value));
+			ParserHelper.SetPropertyValue(parsedArgs, PropertyName, Convert.ToInt32(value));
 		}
 	}
 }

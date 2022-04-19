@@ -22,7 +22,7 @@ namespace SimpleCLI.Command
 		{
 			var flagPresent = args.Contains($"-{Flag}");
 			if (flagPresent)
-				ParserHelper.SetPropertyValue(parsedArgs, Flag, true);
+				ParserHelper.SetPropertyValue(parsedArgs, PropertyName, true);
 		}
 	}
 }

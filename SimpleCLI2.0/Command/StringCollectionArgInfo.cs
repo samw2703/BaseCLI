@@ -27,7 +27,7 @@ namespace SimpleCLI.Command
 			if (value == null)
 				return;
 
-			ParserHelper.SetPropertyValue(parsedArgs, Flag, value);
+			ParserHelper.SetPropertyValue(parsedArgs, PropertyName, value);
 		}
 	}
 }
