@@ -10,8 +10,8 @@ namespace SimpleCLI.Tests.TestCommands
 
 		public List<ArgInfo<TestCommand1ParsedArgs>> ArgInfos => new()
 		{
-			new StringArgInfo<TestCommand1ParsedArgs>("str", "Strrring", null),
-			new IntArgInfo<TestCommand1ParsedArgs>("intt", "intager", null)
+			new StringArgInfo<TestCommand1ParsedArgs>("str", "Strrring"),
+			new IntArgInfo<TestCommand1ParsedArgs>("intt", "intager")
 		};
 		public void Execute(TestCommand1ParsedArgs args)
 		{

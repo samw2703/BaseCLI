@@ -21,7 +21,7 @@ namespace SimpleCLI.Tests.Validation
 			var args = new List<string> { "-test", "I'll Leave" };
 			var argInfos = new List<ArgInfoReflectionObject>
 			{
-				new(new StringArgInfo<object>("test", "", null))
+				new(new StringArgInfo<object>("test", ""))
 			};
 			var validator = new Validator();
 			Assert.DoesNotThrow(() => validator.Validate(args, argInfos));

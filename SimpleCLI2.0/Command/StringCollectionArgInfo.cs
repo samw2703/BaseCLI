@@ -6,8 +6,8 @@ namespace SimpleCLI.Command
 {
 	public class StringCollectionArgInfo<TArgs> : ArgInfo<TArgs> where TArgs : new()
 	{
-		public StringCollectionArgInfo(string flag, string friendlyName, Action<TArgs, List<string>> setArg, bool mandatory = false) 
-			: base(flag, friendlyName, (args, obj) => setArg(args, (List<string>)obj), mandatory)
+		public StringCollectionArgInfo(string flag, string friendlyName, bool mandatory = false) 
+			: base(flag, friendlyName, mandatory)
 		{
 		}
 

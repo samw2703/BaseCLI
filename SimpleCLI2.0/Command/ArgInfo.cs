@@ -8,15 +8,13 @@ namespace SimpleCLI.Command
 		internal string Flag { get; }
 		internal string FriendlyName { get; }
 		internal bool Mandatory { get; }
-		internal Action<TArgs, object> SetArg { get; }
-		protected abstract string TypeDescription { get; }
+        protected abstract string TypeDescription { get; }
 		internal abstract Type MatchingParsedArgsPropertyType { get; }
 
-		public ArgInfo(string flag, string friendlyName, Action<TArgs, object> setArg, bool mandatory = false)
+		public ArgInfo(string flag, string friendlyName, bool mandatory = false)
 		{
 			Flag = flag;
 			FriendlyName = friendlyName;
-            SetArg = setArg;
             Mandatory = mandatory;
 		}
 

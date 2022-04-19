@@ -5,8 +5,8 @@ namespace SimpleCLI.Command
 {
 	public class BoolArgInfo<TArgs> : ArgInfo<TArgs> where TArgs : new()
 	{
-		public BoolArgInfo(string flag, string friendlyName, Action<TArgs, bool> setArg) 
-			: base(flag, friendlyName, (args, obj) => setArg(args, (bool)obj), false)
+		public BoolArgInfo(string flag, string friendlyName) 
+			: base(flag, friendlyName, false)
 		{
 		}
 
