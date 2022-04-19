@@ -17,7 +17,7 @@ namespace SimpleCLI.Conductor
 		}
 
 		public CommandReflectionObject GetCommand(string commandName) =>
-            new(GetCommands().SingleOrDefault(cmd => cmd.Name == commandName));
+            GetCommands().SingleOrDefault(cmd => cmd.Name == commandName);
 
 		public ICommand<TArgs> GetCommand<TArgs>() where TArgs : new()
 			=> (ICommand<TArgs>)_serviceProvider.GetService(_commandCatalogue.GetCommandType<TArgs>());
@@ -26,6 +26,5 @@ namespace SimpleCLI.Conductor
             => _commandCatalogue.GetCommandTypes()
 				.Select(commandType => new CommandReflectionObject(_serviceProvider.GetService(commandType)))
 				.ToList();
-		
     }
 }

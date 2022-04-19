@@ -23,9 +23,9 @@ namespace SimpleCLI.Tests.Conductor
 		{
 			var commands = _commandFactory.GetCommands();
 
-			Assert.True(commands.Any(x => x.GetType() == typeof(TestCommand1)));
-			Assert.True(commands.Any(x => x.GetType() == typeof(TestCommand2)));
-		}
+			Assert.True(commands.Any(x => x.Name == new TestCommand1().Name));
+			Assert.True(commands.Any(x => x.Name == new TestCommand2().Name));
+        }
 
 		[Test]
 		public void GetCommand_GetsCommandWithSpecifiedName()
@@ -33,7 +33,7 @@ namespace SimpleCLI.Tests.Conductor
 			const string command2Name = "6ea27e30-2d8e-43ea-a9d9-bb212fe199a0";
 			var command = _commandFactory.GetCommand(command2Name);
 
-			Assert.True(command.GetType() == typeof(TestCommand2));
+			Assert.True(command.Name == command2Name);
 		}
 
 		[Test]
