@@ -11,9 +11,8 @@ namespace SimpleCLI.ReflectionObjects
 
         public ArgInfoReflectionObject(object? @object)
         {
-            //Also need to check that the object is indeed an ArgInfo
-            if (@object == null)
-                throw new ArgumentException("Invalid CommandReflectionObject");
+            if (@object == null || !IsArgInfo(@object))
+                throw new InvalidReflectionObject();
 
             _object = @object;
         }
@@ -29,5 +28,15 @@ namespace SimpleCLI.ReflectionObjects
 
         private object Execute(string name, params object[] arguments)
             => _object.GetType().GetRuntimeMethods().Single(x => x.Name == name).Invoke(_object, arguments);
+
+        private bool IsArgInfo(object @object)
+            => GetGenericInheritanceHierarchy(@object.GetType()).Contains(typeof(ArgInfo<>));
+        
+
+        private IEnumerable<Type> GetGenericInheritanceHierarchy(Type type)
+        {
+            for (var current = type; current != null; current = current.BaseType)
+                yield return current.IsGenericType ? current.GetGenericTypeDefinition() : current;
+        }
     }
 }
