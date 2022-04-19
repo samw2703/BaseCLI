@@ -87,8 +87,7 @@ namespace SimpleCLI.Tests.ArgInfo
 
 		private class TestParsedArgs
 		{
-			[Flag("bool")]
-			public bool Test { get; set; }
+            public bool Test { get; set; }
 		}
 	}
 }

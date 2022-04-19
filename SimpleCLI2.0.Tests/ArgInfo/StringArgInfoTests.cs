@@ -92,8 +92,7 @@ namespace SimpleCLI.Tests.ArgInfo
 
 		private class TestParsedArgs
 		{
-			[Flag("test")]
-			public string Test { get; set; }
+            public string Test { get; set; }
 		}
 	}
 }

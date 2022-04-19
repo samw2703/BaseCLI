@@ -23,10 +23,8 @@ int arg: {args.IntArg}";
 
 	public class TestCommand1ParsedArgs
 	{
-		[Flag("str")]
-		public string StringArg { get; set; }
-		[Flag("intt")]
-		public int IntArg { get; set; }
+        public string StringArg { get; set; }
+        public int IntArg { get; set; }
 	}
 
 	public static class TestConsole

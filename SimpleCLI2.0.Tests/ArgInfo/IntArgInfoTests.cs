@@ -88,8 +88,7 @@ namespace SimpleCLI.Tests.ArgInfo
 
 		private class TestParsedArgs
 		{
-			[Flag("test")]
-			public int Test { get; set; }
+            public int Test { get; set; }
 		}
 
 		private List<string> CopyList(List<string> args)
