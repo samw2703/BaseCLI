@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
+using SimpleCLI.ArgInfoBuilder;
 
-namespace SimpleCLI.ArgInfoBuilder
+namespace SimpleCLI
 {
     public static class ArgInfo
     {
@@ -21,13 +25,16 @@ namespace SimpleCLI.ArgInfoBuilder
 
             public SetArgInfoType<TArgs> For<TProperty>(Expression<Func<TArgs, TProperty>> getProperty)
             {
+                if (getProperty == null)
+                    throw new ArgInfoBuilderError("getProperty delegate cannot be null");
+
                 return new SetArgInfoType<TArgs>(_flag, _friendlyName, GetPropertyName(getProperty));
             }
 
             private string GetPropertyName<TProperty>(Expression<Func<TArgs, TProperty>> getProperty)
             {
                 if (getProperty.Body.NodeType != ExpressionType.MemberAccess)
-                    throw new Exception("will test this at some point");
+                    throw new ArgInfoBuilderError("getProperty must select a property on your args");
 
                 return ((MemberExpression)getProperty.Body).Member.Name;
             }
@@ -43,14 +50,62 @@ namespace SimpleCLI.ArgInfoBuilder
             {
                 _flag = flag;
                 _friendlyName = friendlyName;
+
+                if (!PropertyExists(propertyName))
+                    throw new ArgInfoBuilderError($"No property with name {propertyName} does not exist");
+
+                if (!PropertyHasSetter(propertyName))
+                    throw new ArgInfoBuilderError($"Property with name {propertyName} does not have a setter");
+
                 _propertyName = propertyName;
             }
 
-            public StringArgInfoBuilder<TArgs> String() => new(_flag, _friendlyName, _propertyName);
-            public IntArgInfoBuilder<TArgs> Int() => new(_flag, _friendlyName, _propertyName);
-            public StringCollectionArgInfoBuilder<TArgs> StringCollection() => new(_flag, _friendlyName, _propertyName);
-            public IntCollectionArgInfoBuilder<TArgs> IntCollection() => new(_flag, _friendlyName, _propertyName);
-            public BoolArgInfoBuilder<TArgs> Bool() => new(_flag, _friendlyName, _propertyName);
+            public StringArgInfoBuilder<TArgs> String()
+            {
+                ValidatePropertyNameIsOfType<string>();
+
+                return new(_flag, _friendlyName, _propertyName);
+            }
+            public IntArgInfoBuilder<TArgs> Int()
+            {
+                ValidatePropertyNameIsOfType<int>();
+
+                return new(_flag, _friendlyName, _propertyName);
+            }
+
+            public StringCollectionArgInfoBuilder<TArgs> StringCollection()
+            {
+                ValidatePropertyNameIsOfType<List<string>>();
+
+                return new(_flag, _friendlyName, _propertyName);
+            }
+
+            public IntCollectionArgInfoBuilder<TArgs> IntCollection()
+            {
+                ValidatePropertyNameIsOfType<List<int>>();
+
+                return new(_flag, _friendlyName, _propertyName);
+            }
+            public BoolArgInfoBuilder<TArgs> Bool()
+            {
+                ValidatePropertyNameIsOfType<bool>();
+
+                return new(_flag, _friendlyName, _propertyName);
+            }
+
+            private void ValidatePropertyNameIsOfType<TType>()
+            {
+                if (typeof(TArgs).GetRuntimeProperties().Single(x => x.Name == _propertyName).PropertyType == typeof(TType))
+                    return;
+
+                throw new ArgInfoBuilderError($"Property {_propertyName} should be of type {typeof(TType).FullName}");
+            }
+
+            private bool PropertyExists(string name)
+                => typeof(TArgs).GetRuntimeProperties().SingleOrDefault(x => x.Name == name) != null;
+
+            private bool PropertyHasSetter(string name)
+                => typeof(TArgs).GetRuntimeProperties().Single(x => x.Name == name).SetMethod != null;
         }
 
         public class StringArgInfoBuilder<TArgs> where TArgs : new()
