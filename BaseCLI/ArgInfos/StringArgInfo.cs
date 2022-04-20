@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace BaseCLI
 {
-	public class StringArgInfo<TArgs> : ArgInfo<TArgs> where TArgs : new()
+    internal class StringArgInfo<TArgs> : ArgInfo<TArgs> where TArgs : new()
 	{
         internal StringArgInfo(string flag, string friendlyName, string propertyName, bool mandatory = false) 
 			: base(flag, friendlyName, propertyName, mandatory)

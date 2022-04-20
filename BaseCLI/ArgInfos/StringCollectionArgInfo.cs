@@ -2,7 +2,7 @@
 
 namespace BaseCLI
 {
-	public class StringCollectionArgInfo<TArgs> : ArgInfo<TArgs> where TArgs : new()
+    internal class StringCollectionArgInfo<TArgs> : ArgInfo<TArgs> where TArgs : new()
 	{
         internal StringCollectionArgInfo(string flag, string friendlyName, string propertyName, bool mandatory = false) 
 			: base(flag, friendlyName, propertyName, mandatory)

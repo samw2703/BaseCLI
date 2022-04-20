@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace BaseCLI
 {
-	public class IntCollectionArgInfo<TArgs> : ArgInfo<TArgs> where TArgs : new()
+    internal class IntCollectionArgInfo<TArgs> : ArgInfo<TArgs> where TArgs : new()
 	{
         internal IntCollectionArgInfo(string flag, string friendlyName, string propertyName, bool mandatory = false) 
             : base(flag, friendlyName, propertyName, mandatory)

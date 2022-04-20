@@ -21,9 +21,9 @@ namespace BaseCLI
             return new SetArgInfoType<TArgs>(flag, friendlyName, this);
         }
 
-        internal void Add(ArgInfo<TArgs> argInfo) => _argInfos.Add(argInfo);
-
         public ArgInfoCollection<TArgs> Build() => new ArgInfoCollection<TArgs>(_argInfos);
+
+        internal void Add(ArgInfo<TArgs> argInfo) => _argInfos.Add(argInfo);
 
         private bool DuplicateFlag(string flag) => _argInfos.Any(x => x.Flag == flag);
     }

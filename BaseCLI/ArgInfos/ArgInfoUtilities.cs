@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace BaseCLI
 {
-    public static class ArgInfoUtilities
+    internal static class ArgInfoUtilities
     {
         public static List<string> GetValuesForFlag(this List<string> strings, string flag)
             => strings

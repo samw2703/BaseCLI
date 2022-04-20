@@ -2,7 +2,7 @@
 
 namespace BaseCLI
 {
-	public class BoolArgInfo<TArgs> : ArgInfo<TArgs> where TArgs : new()
+	internal class BoolArgInfo<TArgs> : ArgInfo<TArgs> where TArgs : new()
 	{
 		internal BoolArgInfo(string flag, string friendlyName, string propertyName) 
 			: base(flag, friendlyName, propertyName, false)

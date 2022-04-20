@@ -2,7 +2,7 @@
 
 namespace BaseCLI
 {
-	public abstract class ArgInfo<TArgs> where TArgs : new()
+	internal abstract class ArgInfo<TArgs> where TArgs : new()
 	{
 		internal string Flag { get; }
 		internal string FriendlyName { get; }

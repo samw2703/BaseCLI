@@ -7,7 +7,7 @@ namespace BaseCLI
     {
         private readonly List<ArgInfo<TArgs>> _argInfos;
 
-        public ArgInfoCollection(List<ArgInfo<TArgs>> argInfos)
+        internal ArgInfoCollection(List<ArgInfo<TArgs>> argInfos)
         {
             _argInfos = argInfos;
         }
