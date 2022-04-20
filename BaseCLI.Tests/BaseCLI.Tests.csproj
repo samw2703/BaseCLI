@@ -16,8 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BaseCLI.Infrastructure\SimpleCLI.csproj" />
-    <ProjectReference Include="..\SimpleCLI2.0\SimpleCLI.csproj" />
+	  <ProjectReference Include="..\BaseCLI\BaseCLI.csproj" />
   </ItemGroup>
 
 </Project>
