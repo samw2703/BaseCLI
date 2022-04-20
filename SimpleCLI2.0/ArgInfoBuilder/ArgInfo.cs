@@ -10,7 +10,7 @@ namespace SimpleCLI
     public static class ArgInfo
     {
         public static SetPropertyName<TArgs> Create<TArgs>(string flag, string friendlyName) where TArgs : new()
-            => new(flag, friendlyName);
+            => new SetPropertyName<TArgs>(flag, friendlyName);
 
         public class SetPropertyName<TArgs> where TArgs : new()
         {
@@ -64,33 +64,33 @@ namespace SimpleCLI
             {
                 ValidatePropertyNameIsOfType<string>();
 
-                return new(_flag, _friendlyName, _propertyName);
+                return new StringArgInfoBuilder<TArgs>(_flag, _friendlyName, _propertyName);
             }
             public IntArgInfoBuilder<TArgs> Int()
             {
                 ValidatePropertyNameIsOfType<int>();
 
-                return new(_flag, _friendlyName, _propertyName);
+                return new IntArgInfoBuilder<TArgs>(_flag, _friendlyName, _propertyName);
             }
 
             public StringCollectionArgInfoBuilder<TArgs> StringCollection()
             {
                 ValidatePropertyNameIsOfType<List<string>>();
 
-                return new(_flag, _friendlyName, _propertyName);
+                return new StringCollectionArgInfoBuilder<TArgs>(_flag, _friendlyName, _propertyName);
             }
 
             public IntCollectionArgInfoBuilder<TArgs> IntCollection()
             {
                 ValidatePropertyNameIsOfType<List<int>>();
 
-                return new(_flag, _friendlyName, _propertyName);
+                return new IntCollectionArgInfoBuilder<TArgs>(_flag, _friendlyName, _propertyName);
             }
             public BoolArgInfoBuilder<TArgs> Bool()
             {
                 ValidatePropertyNameIsOfType<bool>();
 
-                return new(_flag, _friendlyName, _propertyName);
+                return new BoolArgInfoBuilder<TArgs>(_flag, _friendlyName, _propertyName);
             }
 
             private void ValidatePropertyNameIsOfType<TType>()
@@ -121,8 +121,8 @@ namespace SimpleCLI
                 _propertyName = propertyName;
             }
 
-            public StringArgInfo<TArgs> Build() => new(_flag, _friendlyName, _propertyName);
-            public StringArgInfo<TArgs> BuildMandatory() => new(_flag, _friendlyName, _propertyName, true);
+            public StringArgInfo<TArgs> Build() => new StringArgInfo<TArgs>(_flag, _friendlyName, _propertyName);
+            public StringArgInfo<TArgs> BuildMandatory() => new StringArgInfo<TArgs>(_flag, _friendlyName, _propertyName, true);
         }
 
         public class IntArgInfoBuilder<TArgs> where TArgs : new()
@@ -138,8 +138,8 @@ namespace SimpleCLI
                 _propertyName = propertyName;
             }
 
-            public IntArgInfo<TArgs> Build() => new(_flag, _friendlyName, _propertyName);
-            public IntArgInfo<TArgs> BuildMandatory() => new(_flag, _friendlyName, _propertyName, true);
+            public IntArgInfo<TArgs> Build() => new IntArgInfo<TArgs>(_flag, _friendlyName, _propertyName);
+            public IntArgInfo<TArgs> BuildMandatory() => new IntArgInfo<TArgs>(_flag, _friendlyName, _propertyName, true);
         }
 
         public class StringCollectionArgInfoBuilder<TArgs> where TArgs : new()
@@ -155,8 +155,8 @@ namespace SimpleCLI
                 _propertyName = propertyName;
             }
 
-            public StringCollectionArgInfo<TArgs> Build() => new(_flag, _friendlyName, _propertyName);
-            public StringCollectionArgInfo<TArgs> BuildMandatory() => new(_flag, _friendlyName, _propertyName, true);
+            public StringCollectionArgInfo<TArgs> Build() => new StringCollectionArgInfo<TArgs>(_flag, _friendlyName, _propertyName);
+            public StringCollectionArgInfo<TArgs> BuildMandatory() => new StringCollectionArgInfo<TArgs>(_flag, _friendlyName, _propertyName, true);
         }
 
         public class IntCollectionArgInfoBuilder<TArgs> where TArgs : new()
@@ -172,8 +172,8 @@ namespace SimpleCLI
                 _propertyName = propertyName;
             }
 
-            public IntCollectionArgInfo<TArgs> Build() => new(_flag, _friendlyName, _propertyName);
-            public IntCollectionArgInfo<TArgs> BuildMandatory() => new(_flag, _friendlyName, _propertyName, true);
+            public IntCollectionArgInfo<TArgs> Build() => new IntCollectionArgInfo<TArgs>(_flag, _friendlyName, _propertyName);
+            public IntCollectionArgInfo<TArgs> BuildMandatory() => new IntCollectionArgInfo<TArgs>(_flag, _friendlyName, _propertyName, true);
         }
 
         public class BoolArgInfoBuilder<TArgs> where TArgs : new()
@@ -189,7 +189,7 @@ namespace SimpleCLI
                 _propertyName = propertyName;
             }
 
-            public BoolArgInfo<TArgs> Build() => new(_flag, _friendlyName, _propertyName);
+            public BoolArgInfo<TArgs> Build() => new BoolArgInfo<TArgs>(_flag, _friendlyName, _propertyName);
         }
     }
 }
