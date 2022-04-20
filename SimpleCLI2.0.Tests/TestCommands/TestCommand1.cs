@@ -7,11 +7,13 @@ namespace SimpleCLI.Tests.TestCommands
 		public string Name => "f3a76134-967a-4328-9765-8f7d388b9596";
 		public string Description => "I am the first test command";
 
-		public List<ArgInfo<TestCommand1ParsedArgs>> ArgInfos => new()
-		{
-			new StringArgInfo<TestCommand1ParsedArgs>("str", "Strrring", "StringArg"),
-			new IntArgInfo<TestCommand1ParsedArgs>("intt", "intager", "IntArg")
-		};
+        public ArgInfoCollection<TestCommand1ParsedArgs> ArgInfoCollection { get; } = new(
+                new()
+                {
+                    new StringArgInfo<TestCommand1ParsedArgs>("str", "Strrring", "StringArg"),
+                    new IntArgInfo<TestCommand1ParsedArgs>("intt", "intager", "IntArg")
+                });
+
 		public void Execute(TestCommand1ParsedArgs args)
 		{
 			var message = $@"string arg: {args.StringArg}

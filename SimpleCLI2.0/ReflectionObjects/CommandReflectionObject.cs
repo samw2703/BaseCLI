@@ -34,7 +34,7 @@ namespace SimpleCLI.ReflectionObjects
 
         private IEnumerable<ArgInfoReflectionObject> GetArgInfos(object @object)
         {
-            var enumerable = (IEnumerable)@object.GetType().GetProperty(nameof(ICommand<object>.ArgInfos)).GetValue(@object);
+            var enumerable = (IEnumerable)@object.GetType().GetProperty(nameof(ICommand<object>.ArgInfoCollection)).GetValue(@object);
             foreach (var item in enumerable)
                 yield return new ArgInfoReflectionObject(item);
         }

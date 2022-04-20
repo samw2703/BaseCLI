@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using NUnit.Framework;
 using SimpleCLI;
 using SimpleCLI.ReflectionObjects;
@@ -25,7 +26,7 @@ public class CommandReflectionObjectTests
 
         Assert.AreEqual(testCommand.Name, reflectionObject.Name);
         Assert.AreEqual(testCommand.Description, reflectionObject.Description);
-        Assert.AreEqual(testCommand.ArgInfos.Count, reflectionObject.ArgInfos.Count);
+        Assert.AreEqual(Count(testCommand.ArgInfoCollection), reflectionObject.ArgInfos.Count);
         Assert.AreEqual(testCommand.GetType(), reflectionObject.CommandType);
     }
 
@@ -40,16 +41,25 @@ public class CommandReflectionObjectTests
         Assert.AreEqual(1, testCommand.ExecuteCallCount);
     }
 
+    private int Count(IEnumerable enumerable)
+    {
+        var count = 0;
+        foreach (var item in enumerable)
+            count++;
+
+        return count;
+    }
+
     private class TestCommand : ICommand<TestArgs>
     {
         public string Name { get; } = "Test Name";
         public string Description { get; } = "Test Description";
-
-        public List<ArgInfo<TestArgs>> ArgInfos { get; } = new List<ArgInfo<TestArgs>>
-        {
-            new StringArgInfo<TestArgs>("s", "S", "Str"),
-            new IntArgInfo<TestArgs>("i", "I", "Int")
-        };
+        public ArgInfoCollection<TestArgs> ArgInfoCollection { get; } = new ArgInfoCollection<TestArgs>(
+            new List<ArgInfo<TestArgs>>
+            {
+                new StringArgInfo<TestArgs>("s", "S", "Str"),
+                new IntArgInfo<TestArgs>("i", "I", "Int")
+            });
 
         public int ExecuteCallCount { get; private set; } = 0;
 
