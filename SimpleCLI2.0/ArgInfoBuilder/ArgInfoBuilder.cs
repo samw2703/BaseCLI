@@ -66,7 +66,7 @@ namespace SimpleCLI
             => For(getProperty, propertyName => new IntCollectionArgInfo<TArgs>(_flag, _friendlyName, propertyName, true));
 
         public ArgInfoBuilder<TArgs> ForBool(Expression<Func<TArgs, bool>> getProperty)
-            => For(getProperty, propertyName => new StringArgInfo<TArgs>(_flag, _friendlyName, propertyName));
+            => For(getProperty, propertyName => new BoolArgInfo<TArgs>(_flag, _friendlyName, propertyName));
 
 
         private ArgInfoBuilder<TArgs> For<T>(Expression<Func<TArgs, T>> getProperty, Func<string, ArgInfo<TArgs>> createArgInfo)

@@ -42,19 +42,29 @@ namespace SimpleCLI
 
             public CommandSetupService(Assembly[] assemblies)
             {
-                //Should validate that arg infos set delegate is not null
                 var commandTypes = assemblies
                     .SelectMany(x => x.GetTypes())
-                    .Where(type => type.GetInterfaces().Contains(typeof(ICommand<>)) && !type.IsInterface && !type.IsAbstract)
+                    .Where(type => GetGenericInterfaces(type).Contains(typeof(ICommand<>)) && !type.IsInterface && !type.IsAbstract)
                     .ToList();
                 _argToCommand = GetArgToCommandDictionary(commandTypes);
             }
 
             public void AddCommands(IServiceCollection sc)
-                => _argToCommand.Select(x => x.Value).ToList().ForEach(c => sc.AddSingleton(sc));
+                => _argToCommand.Select(x => x.Value).ToList().ForEach(c => sc.AddSingleton(c));
 
             public void AddCommandCatalogue(IServiceCollection sc)
                 => sc.AddSingleton<ICommandCatalogue>(new CommandCatalogue(_argToCommand));
+
+            private IEnumerable<Type> GetGenericInterfaces(Type type)
+            {
+                foreach (var @interface in type.GetInterfaces())
+                {
+                    yield return @interface.IsGenericType
+                        ? @interface.GetGenericTypeDefinition()
+                        : @interface;
+
+                }
+            }
 
             private Dictionary<Type, Type> GetArgToCommandDictionary(List<Type> commandTypes)
             {
