@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace BaseCLI
 {
-	public static class SimpleCLI
+	public static class CLI
 	{
 		public static void Execute(string[] args, Assembly[] commandAssemblies, Action<IServiceCollection> setupServices = null)
 		{
