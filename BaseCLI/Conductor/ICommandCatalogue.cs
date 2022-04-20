@@ -7,8 +7,7 @@ namespace BaseCLI.Conductor
 	internal interface ICommandCatalogue
 	{
 		Type GetParsedArgTypeForCommand(Type commandType);
-		Type GetCommandType<TArgs>();
-		List<Type> GetCommandTypes();
+        List<Type> GetCommandTypes();
 	}
 
     internal class CommandCatalogue : ICommandCatalogue
@@ -31,8 +30,5 @@ namespace BaseCLI.Conductor
             => _argToCommand
                 .Values
                 .ToList();
-
-        public Type GetCommandType<TArgs>() => _argToCommand[typeof(TArgs)];
-
     }
 }
