@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SimpleCLI.Tests.TestCommands
+namespace BaseCLI.Tests.TestCommands
 {
 	public class TestCommand2 : ICommand<TestCommand2ParsedArgs>
     {

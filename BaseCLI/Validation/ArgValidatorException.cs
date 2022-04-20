@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SimpleCLI.Validation
+namespace BaseCLI.Validation
 {
 	internal class ArgValidatorException : Exception
 	{

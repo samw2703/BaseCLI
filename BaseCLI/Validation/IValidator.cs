@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using SimpleCLI.ReflectionObjects;
+using BaseCLI.ReflectionObjects;
 
-namespace SimpleCLI.Validation
+namespace BaseCLI.Validation
 {
 	internal interface IValidator
 	{

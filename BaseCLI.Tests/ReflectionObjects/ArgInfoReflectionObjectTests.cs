@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Security.Principal;
-using Moq;
+using BaseCLI.ReflectionObjects;
 using NUnit.Framework;
-using SimpleCLI.ReflectionObjects;
 
-namespace SimpleCLI.Tests.ReflectionObjects
+namespace BaseCLI.Tests.ReflectionObjects
 {
     public class ArgInfoReflectionObjectTests
     {

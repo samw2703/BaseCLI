@@ -1,17 +1,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using BaseCLI.Conductor;
+using BaseCLI.Execution;
+using BaseCLI.Help;
+using BaseCLI.ReflectionObjects;
+using BaseCLI.Tests.TestCommands;
+using BaseCLI.Validation;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using NUnit.Framework;
-using SimpleCLI.Conductor;
-using SimpleCLI.Execution;
-using SimpleCLI.Help;
-using SimpleCLI.ReflectionObjects;
-using SimpleCLI.Tests.TestCommands;
-using SimpleCLI.Validation;
 
-namespace SimpleCLI.Tests.Conductor
+namespace BaseCLI.Tests.Conductor
 {
 	public class CommandConductorTests
 	{

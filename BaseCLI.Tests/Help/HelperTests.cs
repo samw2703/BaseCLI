@@ -1,11 +1,10 @@
-﻿using System.Reflection;
+﻿using BaseCLI.Help;
+using BaseCLI.ReflectionObjects;
+using BaseCLI.Tests.TestCommands;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
-using SimpleCLI.Help;
-using SimpleCLI.ReflectionObjects;
-using SimpleCLI.Tests.TestCommands;
 
-namespace SimpleCLI.Tests.Help
+namespace BaseCLI.Tests.Help
 {
 	public class HelperTests
 	{

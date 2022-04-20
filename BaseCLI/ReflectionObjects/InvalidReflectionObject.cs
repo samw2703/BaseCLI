@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SimpleCLI.ReflectionObjects
+namespace BaseCLI.ReflectionObjects
 {
     internal class InvalidReflectionObject : Exception
     {

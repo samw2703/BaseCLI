@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SimpleCLI
+namespace BaseCLI
 {
 	public class IntCollectionArgInfo<TArgs> : ArgInfo<TArgs> where TArgs : new()
 	{

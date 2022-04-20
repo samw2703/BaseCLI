@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using SimpleCLI.Validation;
+using BaseCLI.Validation;
 
-namespace SimpleCLI
+namespace BaseCLI
 {
 	internal static class ArgInfoValidationHelper
 	{

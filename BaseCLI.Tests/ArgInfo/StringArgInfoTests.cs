@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
+using BaseCLI.Validation;
 using NUnit.Framework;
-using SimpleCLI.Validation;
 
-namespace SimpleCLI.Tests.ArgInfo
+namespace BaseCLI.Tests.ArgInfo
 {
 	public class StringArgInfoTests
 	{

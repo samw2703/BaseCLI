@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using BaseCLI.Conductor;
+using BaseCLI.Execution;
+using BaseCLI.Help;
+using BaseCLI.Tests.TestCommands;
+using BaseCLI.Validation;
 using Microsoft.Extensions.DependencyInjection;
-using SimpleCLI.Conductor;
-using SimpleCLI.Execution;
-using SimpleCLI.Help;
-using SimpleCLI.Tests.TestCommands;
-using SimpleCLI.Validation;
 
-namespace SimpleCLI.Tests
+namespace BaseCLI.Tests
 {
 	public static class TestCommandWireUp
 	{

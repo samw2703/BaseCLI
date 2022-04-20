@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using SimpleCLI.Conductor;
-using SimpleCLI.ReflectionObjects;
+using BaseCLI.Conductor;
+using BaseCLI.ReflectionObjects;
 
-namespace SimpleCLI.Execution
+namespace BaseCLI.Execution
 {
 	internal interface ICommandExecutor
 	{

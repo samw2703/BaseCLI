@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SimpleCLI.ReflectionObjects;
+using BaseCLI.ReflectionObjects;
 
-namespace SimpleCLI.Conductor
+namespace BaseCLI.Conductor
 {
 	internal interface ICommandFactory
 	{

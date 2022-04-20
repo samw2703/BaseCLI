@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace SimpleCLI.Conductor
+namespace BaseCLI.Conductor
 {
 	internal class CommandAndArgsParser
 	{

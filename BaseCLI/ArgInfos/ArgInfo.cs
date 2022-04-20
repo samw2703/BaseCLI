@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SimpleCLI
+namespace BaseCLI
 {
 	public abstract class ArgInfo<TArgs> where TArgs : new()
 	{

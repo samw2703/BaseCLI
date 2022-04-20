@@ -1,10 +1,10 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using SimpleCLI.Conductor;
-using SimpleCLI.Execution;
-using SimpleCLI.Help;
-using SimpleCLI.Validation;
+﻿using BaseCLI.Conductor;
+using BaseCLI.Execution;
+using BaseCLI.Help;
+using BaseCLI.Validation;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace SimpleCLI
+namespace BaseCLI
 {
     internal static class ServiceCollectionExtensions
     {

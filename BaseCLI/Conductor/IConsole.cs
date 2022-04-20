@@ -1,4 +1,4 @@
-﻿namespace SimpleCLI.Conductor
+﻿namespace BaseCLI.Conductor
 {
 	internal interface IConsole
 	{

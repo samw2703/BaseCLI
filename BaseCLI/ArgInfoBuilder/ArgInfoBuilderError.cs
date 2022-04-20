@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SimpleCLI
+namespace BaseCLI
 {
     internal class ArgInfoBuilderError : Exception
     {

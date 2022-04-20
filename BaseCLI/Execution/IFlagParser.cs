@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using SimpleCLI.ReflectionObjects;
+using BaseCLI.ReflectionObjects;
 
-namespace SimpleCLI.Execution
+namespace BaseCLI.Execution
 {
 	internal interface IFlagParser
     {

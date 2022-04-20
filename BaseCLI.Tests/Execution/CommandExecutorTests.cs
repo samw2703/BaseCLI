@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
+using BaseCLI.Execution;
+using BaseCLI.ReflectionObjects;
+using BaseCLI.Tests.TestCommands;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
-using SimpleCLI.Execution;
-using SimpleCLI.ReflectionObjects;
-using SimpleCLI.Tests.TestCommands;
 
-namespace SimpleCLI.Tests.Execution
+namespace BaseCLI.Tests.Execution
 {
 	public class CommandExecutorTests
 	{

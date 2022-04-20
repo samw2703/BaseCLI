@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SimpleCLI.Execution;
-using SimpleCLI.Help;
-using SimpleCLI.ReflectionObjects;
-using SimpleCLI.Validation;
+using BaseCLI.Execution;
+using BaseCLI.Help;
+using BaseCLI.ReflectionObjects;
+using BaseCLI.Validation;
 
-namespace SimpleCLI.Conductor
+namespace BaseCLI.Conductor
 {
 	internal class CommandConductor
 	{

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
-using SimpleCLI.Conductor;
-using SimpleCLI.ReflectionObjects;
+using BaseCLI.Conductor;
+using BaseCLI.ReflectionObjects;
 
-namespace SimpleCLI.Help
+namespace BaseCLI.Help
 {
     internal class Helper
 	{

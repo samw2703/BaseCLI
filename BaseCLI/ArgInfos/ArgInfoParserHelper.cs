@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Reflection;
 
-namespace SimpleCLI
+namespace BaseCLI
 {
 	internal static class ArgInfoParserHelper
 	{

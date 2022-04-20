@@ -1,10 +1,10 @@
 using System.Linq;
+using BaseCLI.Conductor;
+using BaseCLI.Tests.TestCommands;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
-using SimpleCLI.Conductor;
-using SimpleCLI.Tests.TestCommands;
 
-namespace SimpleCLI.Tests.Conductor
+namespace BaseCLI.Tests.Conductor
 {
 	public class CommandFactoryTests
 	{

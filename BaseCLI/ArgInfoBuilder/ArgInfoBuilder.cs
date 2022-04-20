@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace SimpleCLI
+namespace BaseCLI
 {
     public class ArgInfoBuilder<TArgs> where TArgs : new()
     {

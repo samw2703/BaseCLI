@@ -1,4 +1,4 @@
-﻿namespace SimpleCLI
+﻿namespace BaseCLI
 {
     public interface ICommand<TArgs> where TArgs : new()
 	{

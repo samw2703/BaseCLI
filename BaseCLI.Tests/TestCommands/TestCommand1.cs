@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SimpleCLI.Tests.TestCommands
+namespace BaseCLI.Tests.TestCommands
 {
 	public class TestCommand1 : ICommand<TestCommand1ParsedArgs>
 	{

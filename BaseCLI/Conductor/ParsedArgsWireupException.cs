@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SimpleCLI.Conductor
+namespace BaseCLI.Conductor
 {
 	internal class ParsedArgsWireupException : Exception
 	{

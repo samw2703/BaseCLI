@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using NUnit.Framework;
 
-namespace SimpleCLI.Tests
+namespace BaseCLI.Tests
 {
 	public static class AssertHelpers
 	{

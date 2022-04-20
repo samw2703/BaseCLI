@@ -1,9 +1,9 @@
 using System.Collections.Generic;
+using BaseCLI.ReflectionObjects;
+using BaseCLI.Validation;
 using NUnit.Framework;
-using SimpleCLI.ReflectionObjects;
-using SimpleCLI.Validation;
 
-namespace SimpleCLI.Tests.Validation
+namespace BaseCLI.Tests.Validation
 {
 	public class ValidatorTests
 	{

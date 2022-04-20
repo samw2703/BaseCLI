@@ -1,7 +1,7 @@
+using BaseCLI.Conductor;
 using NUnit.Framework;
-using SimpleCLI.Conductor;
 
-namespace SimpleCLI.Tests.Conductor
+namespace BaseCLI.Tests.Conductor
 {
 	public class When_parsing
 	{

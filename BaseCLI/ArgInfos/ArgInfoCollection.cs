@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-namespace SimpleCLI
+namespace BaseCLI
 {
     public class ArgInfoCollection<TArgs> : IEnumerable where TArgs : new()
     {

@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace SimpleCLI.Tests.ArgInfoBuilder
+namespace BaseCLI.Tests.ArgInfoBuilder
 {
     public class ArgInfoBuilderTests
     {
