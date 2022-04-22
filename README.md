@@ -1,4 +1,4 @@
-# CommandBus
+# BaseCLI
 
 Provides a simple reflection based service setup for creating a cli. Useful for creating internal tools.
 
