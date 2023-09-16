@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using BaseCLI.ReflectionObjects;
 using NUnit.Framework;
 
@@ -64,9 +65,10 @@ namespace BaseCLI.Tests.ReflectionObjects
 
             public int ExecuteCallCount { get; private set; } = 0;
 
-            public void Execute(TestArgs args)
+            public Task Execute(TestArgs args)
             {
                 ExecuteCallCount++;
+                return Task.CompletedTask;
             }
         }
 

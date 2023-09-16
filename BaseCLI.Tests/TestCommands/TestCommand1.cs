@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BaseCLI.Tests.TestCommands
 {
@@ -14,11 +15,12 @@ namespace BaseCLI.Tests.TestCommands
                     new IntArgInfo<TestCommand1ParsedArgs>("intt", "intager", "IntArg")
                 });
 
-		public void Execute(TestCommand1ParsedArgs args)
+		public Task Execute(TestCommand1ParsedArgs args)
 		{
 			var message = $@"string arg: {args.StringArg}
 int arg: {args.IntArg}";
 			TestConsole.WriteLine(message);
+			return Task.CompletedTask;
 		}
 	}
 
