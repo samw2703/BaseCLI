@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace BaseCLI.ReflectionObjects
 {
@@ -27,10 +28,13 @@ namespace BaseCLI.ReflectionObjects
             _object = @object;
         }
 
-        public void Execute<TArgs>(TArgs args)
-            => _object.GetType().GetRuntimeMethods()
+        public async Task Execute<TArgs>(TArgs args)
+        {
+            var task = (Task)_object.GetType().GetRuntimeMethods()
                 .Single(x => x.Name == nameof(ICommand<object>.Execute))
                 .Invoke(_object, new object[] { args });
+            await task.ConfigureAwait(false);
+        }
 
         private IEnumerable<ArgInfoReflectionObject> GetArgInfos(object @object)
         {

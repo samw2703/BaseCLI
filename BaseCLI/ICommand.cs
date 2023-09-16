@@ -1,4 +1,6 @@
-﻿namespace BaseCLI
+﻿using System.Threading.Tasks;
+
+namespace BaseCLI
 {
     public interface ICommand<TArgs> where TArgs : new()
 	{
@@ -6,6 +8,6 @@
         string Description { get; }
         ArgInfoCollection<TArgs> ArgInfoCollection { get; }
 
-		void Execute(TArgs args);
+		Task Execute(TArgs args);
 	}
 }

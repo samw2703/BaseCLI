@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using BaseCLI.Conductor;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -9,11 +10,11 @@ namespace BaseCLI
 {
 	public static class CLI
 	{
-		public static void Execute(string[] args, Assembly[] commandAssemblies, Action<IServiceCollection> setupServices = null)
+		public static async Task Execute(string[] args, Assembly[] commandAssemblies, Action<IServiceCollection> setupServices = null)
 		{
 			var sp = Setup(commandAssemblies, setupServices);
 
-			sp.GetRequiredService<CommandConductor>().Conduce(args);
+			await sp.GetRequiredService<CommandConductor>().Conduce(args);
 		}
 
         private static IServiceProvider Setup(Assembly[] assemblies, Action<IServiceCollection> setupServices = null)

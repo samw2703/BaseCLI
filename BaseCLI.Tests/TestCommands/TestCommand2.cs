@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace BaseCLI.Tests.TestCommands
 {
 	public class TestCommand2 : ICommand<TestCommand2ParsedArgs>
     {
-        public void Execute(TestCommand2ParsedArgs args)
+        public Task Execute(TestCommand2ParsedArgs args)
 		{
 			throw new NotImplementedException();
 		}

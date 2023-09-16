@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using BaseCLI.Execution;
 using BaseCLI.ReflectionObjects;
 using BaseCLI.Tests.TestCommands;
@@ -11,14 +12,14 @@ namespace BaseCLI.Tests.Execution
 	public class CommandExecutorTests
 	{
 		[Test]
-		public void Execute_DoesExecuteTheCommand()
+		public async Task Execute_DoesExecuteTheCommand()
 		{
 			const string stringArg = "I am string arg";
 			const int intArg = 497;
 			var commandExecutor = TestCommandWireUp
 				.WireUpTestCommandsAndCreateServiceProvider()
 				.GetRequiredService<ICommandExecutor>();
-			commandExecutor.Execute(new CommandReflectionObject(new TestCommand1()), new List<string>
+			await commandExecutor.Execute(new CommandReflectionObject(new TestCommand1()), new List<string>
 			{
 				"-str",
 				stringArg,

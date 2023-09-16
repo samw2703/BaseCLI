@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using BaseCLI.Execution;
 using BaseCLI.Help;
 using BaseCLI.ReflectionObjects;
@@ -32,7 +33,7 @@ namespace BaseCLI.Conductor
 			_commandExecutor = commandExecutor;
 		}
 
-		public void Conduce(string[] args)
+		public async Task Conduce(string[] args)
 		{
 			var commandAndArgs = _commandAndArgsParser.Parse(args);
 			var command = _commandFactory.GetCommand(commandAndArgs.CommandName);
@@ -71,7 +72,7 @@ namespace BaseCLI.Conductor
 
 			try
 			{
-				_commandExecutor.Execute(command, commandAndArgs.Args);
+				await _commandExecutor.Execute(command, commandAndArgs.Args);
 			}
 			catch (Exception)
 			{

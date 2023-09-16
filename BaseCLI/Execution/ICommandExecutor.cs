@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using BaseCLI.Conductor;
 using BaseCLI.ReflectionObjects;
 
@@ -6,7 +7,7 @@ namespace BaseCLI.Execution
 {
 	internal interface ICommandExecutor
 	{
-		void Execute(CommandReflectionObject command, List<string> args);
+        Task Execute(CommandReflectionObject command, List<string> args);
 	}
 
     internal class CommandExecutor : ICommandExecutor
@@ -20,17 +21,20 @@ namespace BaseCLI.Execution
             _commandCatalogue = commandCatalogue;
         }
 
-        public void Execute(CommandReflectionObject command, List<string> args)
+        public async Task Execute(CommandReflectionObject command, List<string> args)
         {
             var parsedArgs = Parse(command, args);
-            ExecuteCommand(command, parsedArgs);
+            await ExecuteCommand(command, parsedArgs);
         }
 
-        private void ExecuteCommand(CommandReflectionObject command, object parsedArgs)
-            => command.GetType()
+        private async Task ExecuteCommand(CommandReflectionObject command, object parsedArgs)
+        {
+            var task = (Task)command.GetType()
                 .GetMethod(nameof(CommandReflectionObject.Execute))
                 .MakeGenericMethod(_commandCatalogue.GetParsedArgTypeForCommand(command.CommandType))
                 .Invoke(command, new[] { parsedArgs });
+            await task.ConfigureAwait(false);
+        }
 
         private object Parse(CommandReflectionObject command, List<string> args)
             => _flagParser
